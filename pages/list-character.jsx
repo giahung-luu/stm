@@ -9,7 +9,7 @@ function ListCharacter() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        router.push("auth/signup");
+        // router.push("auth/signup");
       }
     });
   }, [auth]);

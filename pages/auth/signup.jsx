@@ -28,19 +28,19 @@ function SignUp() {
     console.log(result);
   };
 
-  /**
-   *
-   * @param {*} e
-   * @description handle user sign in
-   */
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    const { email, password } = e.target;
-    const result = await signIn(email.value, password.value);
-    if (result) {
-      router.push("/");
-    }
-  };
+  // /**
+  //  *
+  //  * @param {*} e
+  //  * @description handle user sign in
+  //  */
+  // const handleSignIn = async (e) => {
+  //   e.preventDefault();
+  //   const { email, password } = e.target;
+  //   const result = await signIn(email.value, password.value);
+  //   if (result) {
+  //     router.push("/");
+  //   }
+  // };
 
   return (
     <div className="Sign-up">
