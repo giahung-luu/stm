@@ -60,4 +60,5 @@ function Profile() {
   );
 }
 
+Profile.layout = "default";
 export default Profile;

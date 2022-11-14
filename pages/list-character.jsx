@@ -56,5 +56,5 @@ function ListCharacter() {
     </div>
   );
 }
-
+ListCharacter.layout = "default";
 export default ListCharacter;
