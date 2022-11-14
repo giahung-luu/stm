@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { SignUp, SignIn } from "../../services/auth";
+import { signUp, signIn } from "../../services/auth";
 import { auth } from "../../lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
-function Signup() {
+function SignUp() {
   const router = useRouter();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function Signup() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     const { email, password } = e.target;
-    const result = await SignUp(email.value, password.value);
+    const result = await signUp(email.value, password.value);
     console.log(result);
   };
 
@@ -36,7 +36,7 @@ function Signup() {
   const handleSignIn = async (e) => {
     e.preventDefault();
     const { email, password } = e.target;
-    const result = await SignIn(email.value, password.value);
+    const result = await signIn(email.value, password.value);
     if (result) {
       router.push("/");
     }
@@ -44,7 +44,7 @@ function Signup() {
 
   return (
     <div className="Sign-up">
-      <section className="vh-100" style={{ backgroundColor: "#eee" }}>
+      <div className="vh-100" style={{ backgroundColor: "#eee" }}>
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">
@@ -152,9 +152,9 @@ function Signup() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
 
-export default Signup;
+export default SignUp;

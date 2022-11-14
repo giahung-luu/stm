@@ -5,7 +5,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../lib/firebase";
 
-export const SignUp = (email, password) =>
+export const signUp = (email, password) =>
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -17,7 +17,7 @@ export const SignUp = (email, password) =>
       return `This is ${errorCode}: ${errorMessage}`;
     });
 
-export const SignIn = (email, password) => {
+export const signIn = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
