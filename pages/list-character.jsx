@@ -9,7 +9,7 @@ function ListCharacter() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        // router.push("auth/signup");
+        // router.push("auth/signin");
       }
     });
   }, [auth]);
@@ -34,7 +34,17 @@ function ListCharacter() {
                 <h4>
                   Hồ Chí Minh
                   <br />
-                  <span>2.4K Lượt xem</span>
+                  <span>
+                    Hồ Chí Minh (chữ Nho: 胡志明; 19 tháng 5 năm 1890 – 2 tháng
+                    9 năm 1969), tên khai sinh Nguyễn Sinh Cung (chữ Nho:
+                    阮生恭), là một nhà cách mạng và chính khách người Việt Nam.
+                    Ông là người sáng lập Đảng Cộng sản Việt Nam, từng là Chủ
+                    tịch nước Việt Nam Dân chủ Cộng hoà từ 1945–1969, Thủ tướng
+                    Việt Nam Dân chủ Cộng hòa trong những năm 1945–1955, Tổng Bí
+                    thư Ban Chấp hành Trung ương Đảng Lao động Việt Nam từ
+                    1956–1960, Chủ tịch Ban Chấp hành Trung ương Đảng Lao động
+                    Việt Nam từ năm 1951 cho đến khi qua đời.
+                  </span>
                 </h4>
               </div>
             </div>
@@ -43,7 +53,17 @@ function ListCharacter() {
                 <h4>
                   Hồ Chí Minh
                   <br />
-                  <span>2.4K Lượt xem</span>
+                  <span>
+                    Hồ Chí Minh (chữ Nho: 胡志明; 19 tháng 5 năm 1890 – 2 tháng
+                    9 năm 1969), tên khai sinh Nguyễn Sinh Cung (chữ Nho:
+                    阮生恭), là một nhà cách mạng và chính khách người Việt Nam.
+                    Ông là người sáng lập Đảng Cộng sản Việt Nam, từng là Chủ
+                    tịch nước Việt Nam Dân chủ Cộng hoà từ 1945–1969, Thủ tướng
+                    Việt Nam Dân chủ Cộng hòa trong những năm 1945–1955, Tổng Bí
+                    thư Ban Chấp hành Trung ương Đảng Lao động Việt Nam từ
+                    1956–1960, Chủ tịch Ban Chấp hành Trung ương Đảng Lao động
+                    Việt Nam từ năm 1951 cho đến khi qua đời.
+                  </span>
                 </h4>
               </div>
               <div className="col-lg-2">

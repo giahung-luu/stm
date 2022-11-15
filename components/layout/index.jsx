@@ -55,16 +55,16 @@ function Layout({ children }) {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/list-character">Danh Sách</Link>
+                    <Link href="list-character">Danh Sách</Link>
                   </li>
                   <li>
-                    <a href="mindmap.html">MindMap</a>
+                    <a href="mindmap">MindMap</a>
                   </li>
                   <li>
-                    <a href="arena.html">Arena</a>
+                    <a href="arena">Arena</a>
                   </li>
                   <li>
-                    <Link href="auth/signup">
+                    <Link href="auth/signin">
                       {userCurrent ? (
                         <>
                           {userCurrent.email}

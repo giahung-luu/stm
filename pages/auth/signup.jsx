@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { signUp, signIn } from "../../services/auth";
+import { signUp } from "../../services/auth";
 import { auth } from "../../lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -25,22 +25,7 @@ function SignUp() {
     e.preventDefault();
     const { email, password } = e.target;
     const result = await signUp(email.value, password.value);
-    console.log(result);
   };
-
-  // /**
-  //  *
-  //  * @param {*} e
-  //  * @description handle user sign in
-  //  */
-  // const handleSignIn = async (e) => {
-  //   e.preventDefault();
-  //   const { email, password } = e.target;
-  //   const result = await signIn(email.value, password.value);
-  //   if (result) {
-  //     router.push("/");
-  //   }
-  // };
 
   return (
     <div className="Sign-up">
@@ -55,8 +40,8 @@ function SignUp() {
                       <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                         Sign up
                       </p>
-
-                      <form className="mx-1 mx-md-4">
+                      <form onSubmit={handleSignUp}>
+                        {/* <form className="mx-1 mx-md-4"> */}
                         <div className="d-flex flex-row align-items-center mb-4">
                           <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
@@ -65,7 +50,10 @@ function SignUp() {
                               id="form3Example1c"
                               className="form-control"
                             />
-                            <label className="form-label" for="form3Example1c">
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example1c"
+                            >
                               Your Name
                             </label>
                           </div>
@@ -76,10 +64,14 @@ function SignUp() {
                           <div className="form-outline flex-fill mb-0">
                             <input
                               type="email"
+                              name="email"
                               id="form3Example3c"
                               className="form-control"
                             />
-                            <label className="form-label" for="form3Example3c">
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example3c"
+                            >
                               Your Email
                             </label>
                           </div>
@@ -90,10 +82,14 @@ function SignUp() {
                           <div className="form-outline flex-fill mb-0">
                             <input
                               type="password"
+                              name="password"
                               id="form3Example4c"
                               className="form-control"
                             />
-                            <label className="form-label" for="form3Example4c">
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example4c"
+                            >
                               Password
                             </label>
                           </div>
@@ -107,7 +103,10 @@ function SignUp() {
                               id="form3Example4cd"
                               className="form-control"
                             />
-                            <label className="form-label" for="form3Example4cd">
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example4cd"
+                            >
                               Repeat your password
                             </label>
                           </div>
@@ -122,7 +121,7 @@ function SignUp() {
                           />
                           <label
                             className="form-check-label"
-                            for="form2Example3"
+                            htmlFor="form2Example3"
                           >
                             I agree all statements in{" "}
                             <a href="#!">Terms of service</a>
@@ -131,7 +130,7 @@ function SignUp() {
 
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button
-                            type="button"
+                            type="submit"
                             className="btn btn-primary btn-lg"
                           >
                             Register

@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { signIn } from "../../services/auth";
+import { auth } from "../../lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import styles from "./signin.module.css";
-function signin() {
+import Link from "next/link";
+
+function SignIn() {
+  const router = useRouter();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push("/");
+      }
+      // router.push("/auth/signup")
+    });
+  }, [auth]);
+  useEffect(() => {}, []);
+  /**
+   *
+   * @param {*} e
+   * @description handle user sign in
+   */
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    const { email, password } = e.target;
+    const result = await signIn(email.value, password.value);
+    if (result) {
+      router.push("/");
+    }
+  };
   return (
     <div className="Sign-in">
       <section className="vh-100">
@@ -14,7 +44,7 @@ function signin() {
               />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form>
+              <form onSubmit={handleSignIn}>
                 <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                   <p className="lead fw-normal mb-0 me-3">Sign in with</p>
                   <button
@@ -48,11 +78,12 @@ function signin() {
                 <div className="form-outline mb-4">
                   <input
                     type="email"
+                    name="email"
                     id="form3Example3"
                     className="form-control form-control-lg"
                     placeholder="Enter a valid email address"
                   />
-                  <label className="form-label" for="form3Example3">
+                  <label className="form-label" htmlFor="form3Example3">
                     Email address
                   </label>
                 </div>
@@ -61,10 +92,11 @@ function signin() {
                   <input
                     type="password"
                     id="form3Example4"
+                    name="password"
                     className="form-control form-control-lg"
                     placeholder="Enter password"
                   />
-                  <label className="form-label" for="form3Example4">
+                  <label className="form-label" htmlFor="form3Example4">
                     Password
                   </label>
                 </div>
@@ -77,7 +109,7 @@ function signin() {
                       value=""
                       id="form2Example3"
                     />
-                    <label className="form-check-label" for="form2Example3">
+                    <label className="form-check-label" htmlFor="form2Example3">
                       Remember me
                     </label>
                   </div>
@@ -88,7 +120,7 @@ function signin() {
 
                 <div className="text-center text-lg-start mt-4 pt-2">
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-primary btn-lg"
                     style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}
                   >
@@ -96,9 +128,9 @@ function signin() {
                   </button>
                   <p className="small fw-bold mt-2 pt-1 mb-0">
                     Don't have an account?{" "}
-                    <a href="#!" className="link-danger">
+                    <Link href="/auth/signup" className="link-danger">
                       Register
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </form>
@@ -130,4 +162,4 @@ function signin() {
   );
 }
 
-export default signin;
+export default SignIn;
