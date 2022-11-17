@@ -1,8 +1,9 @@
 import React from "react";
-// import styles from "./arena.css";
+
 function Arena() {
   return (
     <div className="Arena">
+      <h2 className="text-center">Arena</h2>
       <div className="container mt-5">
         <div className="d-flex justify-content-center row">
           <div className="col-md-10 col-lg-10">
@@ -74,5 +75,5 @@ function Arena() {
     </div>
   );
 }
-
+Arena.layout = "default";
 export default Arena;
