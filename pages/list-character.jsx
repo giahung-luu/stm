@@ -1,18 +1,19 @@
 import React, { useEffect } from "react";
+//import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { auth } from "../lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import "bootstrap/dist/css/bootstrap.min.css";
-// import bootstrap from "bootstrap";
+//import "bootstrap/dist/css/bootstrap.min.css";
 
-const showModal = () => {
-  const { Modal } = require("bootstrap");
-  const myModal = new Modal("#exampleModal");
-  myModal.show();
-};
+//import bootstrap from "bootstrap";
 
-function ListCharacter() {
+// const showModal = () => {
+//   const { Modal } = require("bootstrap");
+//   const myModal = new Modal("#exampleModal");
+//   myModal.show();
+// };
+function ListCharacter({ totalPostCount }) {
   const router = useRouter();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -22,8 +23,9 @@ function ListCharacter() {
     });
   }, [auth]);
   useEffect(() => {
-    require("bootstrap/dist/js/bootstrap.bundle.min.js");
+    // require("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
+  //let pageIntoArray = Array.from(Array(totalPostCount).keys());
   return (
     <>
       <div className="row list-character-page">
@@ -88,7 +90,7 @@ function ListCharacter() {
           </div>
         </div>
       </div>
-      <button
+      {/* <button
         type="button"
         className="btn btn-primary"
         data-bs-toggle="modal"
@@ -97,8 +99,8 @@ function ListCharacter() {
         onClick={showModal}
       >
         Test
-      </button>
-      <div
+      </button> */}
+      {/* <div
         className="modal fade"
         id="exampleModal"
         tabIndex="-1"
@@ -121,7 +123,7 @@ function ListCharacter() {
             <div className="modal-body">. . .</div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
