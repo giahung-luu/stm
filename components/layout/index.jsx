@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { auth } from "../../lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import Search from "./Search";
 
 function Layout({ children }) {
   const [userCurrent, setUserCurrent] = useState();
@@ -36,17 +37,7 @@ function Layout({ children }) {
                   </h2>
                 </Link>
 
-                <div className="search-input">
-                  <form id="search" action="#">
-                    <input
-                      type="text"
-                      placeholder="Type Something"
-                      id="searchText"
-                      name="searchKeyword"
-                    />
-                    <i className="fa fa-search"></i>
-                  </form>
-                </div>
+                <Search />
 
                 <ul className="nav">
                   <li>
