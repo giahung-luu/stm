@@ -10,10 +10,12 @@ export default function Admin({ children }) {
   return (
     <>
       <Sidebar />
-      <div className="relative md:ml-64 bg-blueGray-100">
+      <div className="tw-relative md:tw-ml-64 tw-bg-blueGray-100">
         <AdminNavbar />
         <HeaderStats />
-        <div className="px-4 md:px-10 mx-auto w-full -m-24">{children}</div>
+        <div className="tw-px-4 md:tw-px-10 tw-mx-auto tw-w-full -tw-m-24">
+          {children}
+        </div>
       </div>
     </>
   );
