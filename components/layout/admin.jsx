@@ -13,8 +13,9 @@ export default function Admin({ children }) {
       <div className="tw-relative md:tw-ml-64 tw-bg-blueGray-100">
         <AdminNavbar />
         <HeaderStats />
-        <div className="tw-px-4 md:tw-px-10 tw-mx-auto tw-w-full -tw-m-24">
+        <div className="tw-px-4 md:tw-px-10 tw-mx-auto tw-w-full -tw-m-24 tw-pb-10">
           {children}
+          
         </div>
       </div>
     </>

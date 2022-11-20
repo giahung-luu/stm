@@ -55,7 +55,7 @@ function ListQuestion({ color, questions }) {
               </h3>
             </div>
             <button
-              className="tw-py-1 tw-px-4 tw-bg-lightBlue-500 tw-text-white tw-rounded-lg"
+              className="tw-py-1 tw-px-4 tw-bg-lightBlue-500 tw-text-white tw-rounded-lg hover:tw-text-lightBlue-500 hover:tw-bg-white tw-border tw-border-lightBlue-500"
               onClick={() => setShowModal(true)}
             >
               Add question
@@ -178,10 +178,10 @@ function ListQuestion({ color, questions }) {
                       Close
                     </button>
                     <button
-                      className="tw-bg-emerald-500 tw-text-white active:tw-bg-emerald-600 tw-font-bold tw-uppercase tw-text-sm tw-px-6 tw-py-3 tw-rounded tw-shadow hover:tw-shadow-lg tw-outline-none focus:tw-outline-none tw-mr-1 tw-mb-1 tw-ease-linear tw-transition-all tw-duration-150"
+                      className="tw-bg-lightBlue-500 tw-text-white active:tw-bg-emerald-600 tw-font-bold tw-uppercase tw-text-sm tw-px-6 tw-py-2 tw-rounded tw-shadow hover:tw-shadow-lg tw-outline-none focus:tw-outline-none tw-mr-1 tw-mb-1 tw-ease-linear tw-transition-all tw-duration-150"
                       type="submit"
                     >
-                      Save Changes
+                      Add
                     </button>
                   </div>
                 </form>
