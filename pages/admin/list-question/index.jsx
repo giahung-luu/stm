@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { addQuestion, getQuestions } from "../../../services/listQuestion";
-
-function ListQuestion({ color }) {
+import { notify } from "../../../components";
+function ListQuestion({ color, questions }) {
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
+
   const handleAddQuestion = (e) => {
     e.preventDefault();
     const {
@@ -24,21 +25,21 @@ function ListQuestion({ color }) {
       right_answer.value
     );
     if (result) {
-      console.log("complete");
+      setShowModal(false);
+      notify("Thêm câu hỏi thành công", "success");
     } else {
+      notify("Thêm câu hỏi thất bại", "error");
     }
   };
 
-  useEffect(() => {
-    const getData = getQuestions();
-    console.log(getData);
-  }, []);
   return (
     <>
       <div
         className={
           "tw-relative tw-flex tw-flex-col tw-min-w-0 tw-break-words tw-w-full tw-b-6 tw-shadow-lg tw-rounded " +
-          (color === "light" ? "bg-white" : "bg-blueGray-700 text-white")
+          (color === "light"
+            ? "tw-bg-white"
+            : "tw-bg-blueGray-700 tw-text-white")
         }
       >
         <div className="tw-rounded-t tw-mb-0 tw-px-4 tw-py-3 tw-border-0">
@@ -47,7 +48,7 @@ function ListQuestion({ color }) {
               <h3
                 className={
                   "tw-font-semibold tw-text-lg " +
-                  (color === "light" ? "text-blueGray-700" : "text-white")
+                  (color === "light" ? "tw-text-blueGray-700" : "tw-text-white")
                 }
               >
                 Questions
@@ -72,7 +73,7 @@ function ListQuestion({ color }) {
                 >
                   {/*header*/}
                   <div className="tw-flex tw-items-start tw-justify-between tw-p-5 tw-border-b tw-border-solid tw-border-blueGray-200 tw-rounded-t">
-                    <h3 className="tw-text-3xl tw-font-semibold">
+                    <h3 className="tw-text-3xl tw-font-semibold tw-text-gray-700">
                       Add question
                     </h3>
                     <button
@@ -80,7 +81,7 @@ function ListQuestion({ color }) {
                       onClick={() => setShowModal(false)}
                       type="button"
                     >
-                      <span className="tw-text-black tw-h-6 tw-w-6 tw-text-2xl tw-block tw-outline-none focus:tw-outline-none">
+                      <span className="tw-text-black tw-h-6 tw-w-6 tw-text-2xl tw-block tw-outline-none focus:tw-outline-none hover:tw-opacity-50">
                         ×
                       </span>
                     </button>
@@ -88,34 +89,82 @@ function ListQuestion({ color }) {
                   {/*body*/}
                   <div className="tw-relative tw-p-6 tw-flex-auto">
                     <div>
-                      <label htmlFor="">Title</label>
-                      <input type="text" name="title" />
+                      <label htmlFor="title" class="tw-block">
+                        Title
+                      </label>
+                      <textarea
+                        name="title"
+                        rows="4"
+                        className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-w-full"
+                      ></textarea>
                     </div>
                     <div>
-                      <label htmlFor="">Point</label>
-                      <input type="number" name="point" />
+                      <label htmlFor="point" className="tw-block">
+                        Point
+                      </label>
+                      <input
+                        type="number"
+                        name="point"
+                        className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-w-full"
+                      />
                     </div>
                     <div>
                       <label>List answer</label>
-                      <div className="tw-flex">
-                        <span>A</span>
-                        <input type="text" name="a_answer" className="border" />
-                        <input type="radio" name="right_answer" value="a" />
+                      <div className="tw-flex tw-mb-2 tw-items-center">
+                        <span className="tw-mr-2">A</span>
+                        <input
+                          type="text"
+                          name="a_answer"
+                          className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
+                        />
+                        <input
+                          type="radio"
+                          name="right_answer"
+                          value="a"
+                          className="tw-ml-2"
+                        />
                       </div>
-                      <div className="tw-flex">
-                        <span>B</span>
-                        <input type="text" name="b_answer" className="border" />
-                        <input type="radio" name="right_answer" value="b" />
+                      <div className="tw-flex tw-mb-2 tw-items-center">
+                        <span className="tw-mr-2">B</span>
+                        <input
+                          type="text"
+                          name="b_answer"
+                          className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
+                        />
+                        <input
+                          type="radio"
+                          name="right_answer"
+                          value="b"
+                          className="tw-ml-2"
+                        />
                       </div>
-                      <div className="tw-flex">
-                        <span>C</span>
-                        <input type="text" name="c_answer" className="border" />
-                        <input type="radio" name="right_answer" value="c" />
+                      <div className="tw-flex tw-mb-2 tw-items-center">
+                        <span className="tw-mr-2">C</span>
+                        <input
+                          type="text"
+                          name="c_answer"
+                          className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
+                        />
+                        <input
+                          type="radio"
+                          name="right_answer"
+                          value="c"
+                          className="tw-ml-2"
+                        />
                       </div>
-                      <div className="tw-flex">
-                        <span>D</span>
-                        <input type="text" name="d_answer" className="border" />
-                        <input type="radio" name="right_answer" value="d" />
+                      <div className="tw-flex tw-mb-2 tw-items-center">
+                        <span className="tw-mr-2">D</span>
+                        <input
+                          type="text"
+                          name="d_answer"
+                          className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
+                        />
+                        <input
+                          type="radio"
+                          name="right_answer"
+                          value="d"
+                          className="tw-ml-2"
+                        />
                       </div>
                     </div>
                   </div>
@@ -208,37 +257,41 @@ function ListQuestion({ color }) {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs whitespace-nowrap p-4 text-left flex items-center">
-                  1
-                </th>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-p-4">
-                  Nguyên thủ những nước nào sau đây tham dự Hội nghị Ianta
-                  (2/1945)?
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  5
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <span className="tw-font-bold tw-text-center">B</span>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <div className="tw-flex tw-items-center">
-                    <span className="tw-mr-2">60%</span>
-                    <div className="tw-relative tw-w-full">
-                      <div className="tw-overflow-hidden tw-h-2 tw-text-xs tw-flex tw-rounded tw-bg-red-200">
-                        <div
-                          style={{ width: "60%" }}
-                          className="tw-shadow-none tw-flex tw-flex-col tw-text-center tw-whitespace-nowrap tw-text-white tw-justify-center tw-bg-red-500"
-                        ></div>
+              {questions &&
+                questions.map((item, index) => (
+                  <tr key={item.id}>
+                    <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs whitespace-nowrap p-4 text-left flex items-center">
+                      {index + 1}
+                    </th>
+                    <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-p-4">
+                      {item.title}
+                    </td>
+                    <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
+                      {item.point}
+                    </td>
+                    <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
+                      <span className="tw-font-bold tw-text-center tw-uppercase">
+                        {item.right_answer}
+                      </span>
+                    </td>
+                    <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
+                      <div className="tw-flex tw-items-center">
+                        <span className="tw-mr-2">60%</span>
+                        <div className="tw-relative tw-w-full">
+                          <div className="tw-overflow-hidden tw-h-2 tw-text-xs tw-flex tw-rounded tw-bg-red-200">
+                            <div
+                              style={{ width: "60%" }}
+                              className="tw-shadow-none tw-flex tw-flex-col tw-text-center tw-whitespace-nowrap tw-text-white tw-justify-center tw-bg-red-500"
+                            ></div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-right">
-                  {/* <TableDropdown /> */}
-                </td>
-              </tr>
+                    </td>
+                    <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-right">
+                      {/* <TableDropdown /> */}
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
@@ -256,4 +309,17 @@ ListQuestion.defaultProps = {
 ListQuestion.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),
 };
+
+export async function getStaticProps() {
+  const questions = await getQuestions();
+  if (!questions) {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    props: { questions },
+  };
+}
+
 export default ListQuestion;
