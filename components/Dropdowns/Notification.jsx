@@ -18,7 +18,7 @@ const NotificationDropdown = () => {
   return (
     <>
       <button
-        className="text-blueGray-500 block py-1 px-3"
+        className="tw-text-blueGray-500 tw-block tw-py-1 tw-px-3"
         ref={btnDropdownRef}
         onClick={(e) => {
           e.preventDefault();
@@ -30,13 +30,13 @@ const NotificationDropdown = () => {
       <div
         ref={popoverDropdownRef}
         className={
-          (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+          (dropdownPopoverShow ? "tw-block " : "tw-hidden ") +
+          "tw-bg-white tw-text-base tw-z-50 tw-float-left tw-py-2 tw-list-none tw-text-left tw-rounded tw-shadow-lg tw-min-w-48"
         }
       >
         <button
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "tw-text-sm tw-py-2 tw-px-4 tw-font-normal tw-block tw-w-full tw-whitespace-nowrap tw-bg-transparent tw-text-blueGray-700"
           }
           onClick={(e) => e.preventDefault()}
         >
@@ -44,7 +44,7 @@ const NotificationDropdown = () => {
         </button>
         <button
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "tw-text-sm tw-py-2 tw-px-4 tw-font-normal tw-block tw-w-full tw-whitespace-nowrap tw-bg-transparent tw-text-blueGray-700"
           }
           onClick={(e) => e.preventDefault()}
         >
@@ -52,16 +52,16 @@ const NotificationDropdown = () => {
         </button>
         <button
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "tw-text-sm tw-py-2 tw-px-4 tw-font-normal tw-block tw-w-full tw-whitespace-nowrap tw-bg-transparent tw-text-blueGray-700"
           }
           onClick={(e) => e.preventDefault()}
         >
           Something else here
         </button>
-        <div className="h-0 my-2 border border-solid border-blueGray-100" />
+        <div className="tw-h-0 tw-my-2 tw-border tw-border-solid tw-border-blueGray-100" />
         <button
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "tw-text-sm tw-py-2 tw-px-4 tw-font-normal tw-block tw-w-full tw-whitespace-nowrap tw-bg-transparent tw-text-blueGray-700"
           }
           onClick={(e) => e.preventDefault()}
         >

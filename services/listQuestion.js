@@ -20,7 +20,11 @@ export async function addQuestion(title, point, list_answer, right_answer) {
 export async function getQuestions() {
   try {
     const querySnapshot = await getDocs(collection(database, "questions"));
-    return querySnapshot;
+    let questions = [];
+    querySnapshot.forEach((doc) => {
+      questions.push({ id: doc.id, ...doc.data() });
+    });
+    return questions;
   } catch (e) {
     return false;
   }

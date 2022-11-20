@@ -17,18 +17,18 @@ const UserDropdown = () => {
   return (
     <>
       <button
-        className="text-blueGray-500 block"
+        className="tw-text-blueGray-500 tw-block"
         ref={btnDropdownRef}
         onClick={(e) => {
           e.preventDefault();
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <div className="items-center flex">
-          <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
+        <div className="tw-items-center tw-flex">
+          <span className="tw-w-12 tw-h-12 tw-text-sm tw-text-white tw-bg-blueGray-200 tw-inline-flex tw-items-center tw-justify-center tw-rounded-full">
             <img
               alt="avatar"
-              className="w-full rounded-full align-middle border-none shadow-lg"
+              className="tw-w-full tw-rounded-full tw-align-middle tw-border-none tw-shadow-lg"
               src="/images/avatar-01.jpg"
             />
           </span>
@@ -37,13 +37,13 @@ const UserDropdown = () => {
       <div
         ref={popoverDropdownRef}
         className={
-          (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white text-base z-50 py-2 list-none text-left rounded shadow-lg min-w-48"
+          (dropdownPopoverShow ? "tw-block " : "tw-hidden ") +
+          "tw-bg-white tw-text-base tw-z-50 tw-py-2 tw-list-none tw-text-left tw-rounded tw-shadow-lg tw-min-w-48"
         }
       >
         <button
           className={
-            "text-sm text-left py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "tw-text-sm tw-text-left tw-py-2 tw-px-4 tw-font-normal tw-block tw-w-full tw-whitespace-nowrap tw-bg-transparent tw-text-blueGray-700"
           }
           onClick={(e) => e.preventDefault()}
         >
@@ -51,16 +51,16 @@ const UserDropdown = () => {
         </button>
         <button
           className={
-            "text-sm text-left py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "tw-text-sm tw-text-left tw-py-2 tw-px-4 tw-font-normal tw-block tw-w-full tw-whitespace-nowrap tw-bg-transparent tw-text-blueGray-700"
           }
           onClick={(e) => e.preventDefault()}
         >
           Settings
         </button>
-        <div className="h-0 my-2 border border-solid border-blueGray-100" />
+        <div className="tw-h-0 tw-my-2 tw-border tw-border-solid tw-border-blueGray-100" />
         <button
           className={
-            "text-sm text-left py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "tw-text-sm tw-text-left tw-py-2 tw-px-4 tw-font-normal tw-block tw-w-full tw-whitespace-nowrap tw-bg-transparent tw-text-blueGray-700"
           }
           onClick={(e) => e.preventDefault()}
         >
