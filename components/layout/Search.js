@@ -32,7 +32,7 @@ const Search = () => {
             <p>Search Result for {search}</p>
             {matchedCharacters.length > 0 ? <ul>
                 {matchedCharacters.map((character) => (
-                    <li key={character.id}>
+                    <li key={character.id} onClick={() => setSearch('')}>
                         <Link href={{ pathname: '/character', query: { data: JSON.stringify(character) } }}>
                             {character.name}
                         </Link>
