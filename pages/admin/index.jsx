@@ -13,7 +13,7 @@ function Admin() {
   }, []);
   return (
     <>
-      <div className="flex flex-wrap"></div>
+      <div className="tw-flex tw-flex-wrap"></div>
     </>
   );
 }
