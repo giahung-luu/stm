@@ -36,8 +36,7 @@ const Modal = ({ selectedCharacter, setCharacters, setShowModal }) => {
         if (data) {
             setCharacters((characters) => characters.map((character) =>
                 character.id === selectedCharacter.id ? data : character
-            )
-            );
+            ));
             notify("success", "Character updated successfully");
         } else {
             notify("error", "Something went wrong");
@@ -53,7 +52,6 @@ const Modal = ({ selectedCharacter, setCharacters, setShowModal }) => {
                     {/*content*/}
                     <form
                         className="tw-border-0 tw-rounded-lg tw-shadow-lg tw-relative tw-flex tw-flex-col tw-w-full tw-bg-white tw-outline-none tw-focus:outline-none"
-                    //onSubmit={handleAddCharacter}
                     >
                         {/*header*/}
                         <div className="tw-flex tw-items-start tw-justify-between tw-p-5 tw-border-b tw-border-solid tw-border-blueGray-200 tw-rounded-t">
@@ -123,7 +121,6 @@ const Modal = ({ selectedCharacter, setCharacters, setShowModal }) => {
                             </button>
                             <button
                                 className="tw-bg-lightBlue-500 tw-text-white active:tw-bg-emerald-600 tw-font-bold tw-uppercase tw-text-sm tw-px-6 tw-py-2 tw-rounded tw-shadow hover:tw-shadow-lg tw-outline-none focus:tw-outline-none tw-mr-1 tw-mb-1 tw-ease-linear tw-transition-all tw-duration-150"
-                                //type="submit"
                                 onClick={isAddModal ? handleAddCharacter : handleEditCharacter}
                             >
                                 {isAddModal ? "Add" : "Edit"}
