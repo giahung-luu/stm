@@ -55,7 +55,7 @@ function Layout({ children }) {
                     <a href="arena">Arena</a>
                   </li>
                   <li>
-                    <Link href="auth/signin">
+                    <Link href="/profile">
                       {userCurrent ? (
                         <>
                           {userCurrent.email}

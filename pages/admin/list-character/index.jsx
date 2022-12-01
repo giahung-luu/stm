@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import Character from "./Character";
+import Modal from "./Modal";
+import { getCharacters } from "../../../services/characterService";
 
 function ListCharacter({ color }) {
+  const [characters, setCharacters] = React.useState([]);
+  const [selectedCharacter, setSelectedCharacter] = React.useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    getCharacters().then((characters) => {
+      setCharacters(characters);
+    });
+  }, []);
+
   return (
     <>
       <div
@@ -22,6 +35,15 @@ function ListCharacter({ color }) {
                 Character
               </h3>
             </div>
+            <button
+              className="tw-py-1 tw-px-4 tw-bg-lightBlue-500 tw-text-white tw-rounded-lg hover:tw-text-lightBlue-500 hover:tw-bg-white tw-border tw-border-lightBlue-500"
+              onClick={() => {
+                setSelectedCharacter(null);
+                setShowModal(true);
+              }}
+            >
+              Add character
+            </button>
           </div>
         </div>
         <div className="tw-block tw-w-full tw-overflow-x-auto">
@@ -47,7 +69,7 @@ function ListCharacter({ color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Budget
+                  Description
                 </th>
                 <th
                   className={
@@ -57,7 +79,7 @@ function ListCharacter({ color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Status
+                  Image Link
                 </th>
                 <th
                   className={
@@ -67,17 +89,7 @@ function ListCharacter({ color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Users
-                </th>
-                <th
-                  className={
-                    "tw-px-6 tw-align-middle tw-border tw-order-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Completion
+                  Description Detail
                 </th>
                 <th
                   className={
@@ -86,334 +98,53 @@ function ListCharacter({ color }) {
                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
-                ></th>
+                >
+                  Time Start
+                </th>
+                <th
+                  className={
+                    "tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
+                  Time End
+                </th>
+                <th
+                  className={
+                    "tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-left tw-flex tw-items-center">
-                  <img
-                    src="/img/bootstrap.jpg"
-                    className="tw-h-12 tw-w-12 tw-bg-white tw-rounded-full tw-border"
-                    alt="..."
-                  ></img>{" "}
-                  <span
-                    className={
-                      "tw-ml-3 tw-font-bold " +
-                      +(color === "light" ? "text-blueGray-600" : "text-white")
-                    }
-                  >
-                    Argon Design System
-                  </span>
-                </th>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap p-4">
-                  $2,500 USD
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <i className="tw-fas tw-fa-circle tw-text-orange-500 tw-mr-2"></i>{" "}
-                  pending
-                </td>
-                <td className="tw-order-t-0 tw-px-6 tw-lign-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <div className="flex">
-                    <img
-                      src="/img/team-1-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow"
-                    ></img>
-                    <img
-                      src="/img/team-2-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow -ml-4"
-                    ></img>
-                    <img
-                      src="/img/team-3-800x800.jpg"
-                      alt="..."
-                      className="tw--10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                    <img
-                      src="/img/team-4-470x470.png"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow -ml-4"
-                    ></img>
-                  </div>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <div className="tw-flex tw-items-center">
-                    <span className="tw-mr-2">60%</span>
-                    <div className="tw-relative tw-w-full">
-                      <div className="tw-overflow-hidden tw-h-2 tw-text-xs tw-flex tw-rounded tw-bg-red-200">
-                        <div
-                          style={{ width: "60%" }}
-                          className="tw-shadow-none tw-flex tw-flex-col tw-text-center tw-whitespace-nowrap tw-text-white tw-justify-center tw-bg-red-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-right">
-                  {/* <TableDropdown /> */}
-                </td>
-              </tr>
-              <tr>
-                <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-left tw-flex tw-items-center">
-                  <img
-                    src="/img/angular.jpg"
-                    className="tw-h-12 tw-w-12 tw-bg-white tw-rounded-full tw-border"
-                    alt="..."
-                  ></img>{" "}
-                  <span
-                    className={
-                      "tw-ml-3 tw-font-bold " +
-                      +(color === "light" ? "text-blueGray-600" : "text-white")
-                    }
-                  >
-                    Angular Now UI Kit PRO
-                  </span>
-                </th>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  $1,800 USD
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <i className="tw-fas tw-fa-circle tw-ext-emerald-500 tw-mr-2"></i>{" "}
-                  completed
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <div className="flex">
-                    <img
-                      src="/img/team-1-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow"
-                    ></img>
-                    <img
-                      src="/img/team-2-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                    <img
-                      src="/img/team-3-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                    <img
-                      src="/img/team-4-470x470.png"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                  </div>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <div className="tw-flex tw-items-center">
-                    <span className="tw-mr-2">100%</span>
-                    <div className="tw-relative tw-w-full">
-                      <div className="tw-overflow-hidden tw-h-2 tw-text-xs tw-flex tw-rounded tw-bg-emerald-200">
-                        <div
-                          style={{ width: "100%" }}
-                          className="tw-shadow-none tw-flex tw-flex-col tw-text-center tw-whitespace-nowrap tw-text-white tw-justify-center tw-bg-emerald-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-right">
-                  {/* <TableDropdown /> */}
-                </td>
-              </tr>
-              <tr>
-                <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-left tw-flex tw-items-center">
-                  <img
-                    src="/img/sketch.jpg"
-                    className="tw-h-12 tw-w-12 tw-bg-white tw-rounded-full tw-border"
-                    alt="..."
-                  ></img>{" "}
-                  <span
-                    className={
-                      "tw-ml-3 tw-font-bold " +
-                      +(color === "light" ? "text-blueGray-600" : "text-white")
-                    }
-                  >
-                    Black Dashboard Sketch
-                  </span>
-                </th>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-order-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  $3,150 USD
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <i className="tw-fas tw-fa-circle tw-text-red-500 tw-mr-2"></i>{" "}
-                  delayed
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <div className="flex">
-                    <img
-                      src="/img/team-1-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow"
-                    ></img>
-                    <img
-                      src="/img/team-2-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                    <img
-                      src="/img/team-3-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                    <img
-                      src="/img/team-4-470x470.png"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                  </div>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <div className="tw-flex tw-items-center">
-                    <span className="tw-mr-2">73%</span>
-                    <div className="tw-relative tw-w-full">
-                      <div className="tw-overflow-hidden tw-h-2 tw-text-xs tw-flex tw-rounded tw-bg-red-200">
-                        <div
-                          style={{ width: "73%" }}
-                          className="tw-shadow-none tw-flex tw-flex-col tw-text-center tw-whitespace-nowrap tw-text-white tw-justify-center tw-bg-red-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-right">
-                  {/* <TableDropdown /> */}
-                </td>
-              </tr>
-              <tr>
-                <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-left tw-flex tw-items-center">
-                  <img
-                    src="/img/react.jpg"
-                    className="tw-h-12 tw-w-12 tw-bg-white tw-rounded-full tw-border"
-                    alt="..."
-                  ></img>{" "}
-                  <span
-                    className={
-                      "tw-ml-3 tw-font-bold " +
-                      +(color === "light" ? "text-blueGray-600" : "text-white")
-                    }
-                  >
-                    React Material Dashboard
-                  </span>
-                </th>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  $4,400 USD
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <i className="tw-fas tw-fa-circle tw-text-teal-500 tw-mr-2"></i>{" "}
-                  on schedule
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <div className="flex">
-                    <img
-                      src="/img/team-1-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow"
-                    ></img>
-                    <img
-                      src="/img/team-2-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                    <img
-                      src="/img/team-3-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                    <img
-                      src="/img/team-4-470x470.png"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                  </div>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <div className="tw-flex tw-items-center">
-                    <span className="tw-mr-2">90%</span>
-                    <div className="tw-relative tw-w-full">
-                      <div className="tw-overflow-hidden tw-h-2 tw-text-xs tw-flex tw-rounded tw-bg-teal-200">
-                        <div
-                          style={{ width: "90%" }}
-                          className="tw-shadow-none tw-flex tw-flex-col tw-text-center tw-whitespace-nowrap tw-text-white tw-justify-center tw-bg-teal-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-hitespace-nowrap tw-p-4 tw-text-right">
-                  {/* <TableDropdown /> */}
-                </td>
-              </tr>
-              <tr>
-                <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-ext-left tw-flex tw-items-center">
-                  <img
-                    src="/img/vue.jpg"
-                    className="tw-h-12 tw-w-12 tw-bg-white tw-rounded-full tw-border"
-                    alt="..."
-                  ></img>{" "}
-                  <span
-                    className={
-                      "tw-ml-3 tw-font-bold " +
-                      +(color === "light" ? "text-blueGray-600" : "text-white")
-                    }
-                  >
-                    React Material Dashboard
-                  </span>
-                </th>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-order-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  $2,200 USD
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <i className="tw-fas tw-fa-circle tw-text-emerald-500 tw-mr-2"></i>{" "}
-                  completed
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <div className="flex">
-                    <img
-                      src="/img/team-1-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow"
-                    ></img>
-                    <img
-                      src="/img/team-2-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                    <img
-                      src="/img/team-3-800x800.jpg"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                    <img
-                      src="/img/team-4-470x470.png"
-                      alt="..."
-                      className="tw-w-10 tw-h-10 tw-rounded-full tw-border-2 tw-border-blueGray-50 tw-shadow tw--ml-4"
-                    ></img>
-                  </div>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                  <div className="tw-flex tw-items-center">
-                    <span className="tw-mr-2">100%</span>
-                    <div className="tw-relative tw-w-full">
-                      <div className="tw-overflow-hidden tw-h-2 tw-text-xs tw-flex tw-rounded tw-bg-emerald-200">
-                        <div
-                          style={{ width: "100%" }}
-                          className="tw-shadow-none tw-flex tw-flex-col tw-text-center tw-whitespace-nowrap tw-text-white tw-justify-center tw-bg-emerald-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-right">
-                  {/* <TableDropdown /> */}
-                </td>
-              </tr>
+              {characters.map((character) => (
+                <Character
+                  character={character}
+                  setCharacters={setCharacters}
+                  color={color}
+                  setSelectedCharacter={setSelectedCharacter}
+                  setShowModal={setShowModal}
+                />
+              ))}
             </tbody>
           </table>
         </div>
       </div>
+      {showModal ? (
+        <Modal
+          setShowModal={setShowModal}
+          selectedCharacter={selectedCharacter}
+          setSelectedCharacter={setSelectedCharacter}
+          setCharacters={setCharacters}
+        />
+      ) : null}
     </>
   );
 }
