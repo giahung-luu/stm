@@ -1,3 +1,149 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card-container {
+  position: relative;
+  display: flex;
+  width: 380px;
+  height: 520px;
+  justify-content: center;
+  align-items: center;
+}
+.card-container:hover .card-background {
+  animation-name: zoomout;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  cursor: pointer;
+}
+.card-container:hover .image > img {
+  animation-name: character-in;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+.card-container:hover {
+  border-radius: 5px;
+}
+
+.card-background {
+  display: flex;
+  position: relative;
+  background: pink;
+  background-blend-mode: multiply;
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1741575/backdrop-fo.png");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  animation-name: zoomin;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+.character-image {
+  display: block;
+  clip: rect(10px, 190px, 190px, 10px);
+  background: blue;
+  width: 380px;
+}
+.character-image .image {
+  width: inherit;
+}
+.character-image .image img {
+  position: absolute;
+  bottom: 0px;
+  right: -70px;
+  width: inherit;
+  clip: rect(0px, 210px, 420px, 0px);
+  animation-name: character-out;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.character-information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 200px;
+  border-radius: 0px 0px 5px 5px;
+}
+.character-information > .name {
+  text-transform: uppercase;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  margin-top: 0px;
+  color: white;
+  text-shadow: 0 0 2px rgba(10, 10, 10, 0.7);
+  font-family: "Bangers";
+  letter-spacing: 2px;
+}
+.character-information > .description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: inherit;
+  height: inherit;
+  background-color: rgba(0, 0, 0, 0.45);
+  border-radius: 0px 0px 5px 5px;
+  color: white;
+  font-size: 1rem;
+}
+.character-information > .description > .description-text {
+  margin: 18px;
+  text-align: center;
+}
+
+@-webkit-keyframes zoomout {
+  to {
+    width: 94%;
+    height: 94%;
+  }
+  from {
+    width: 100%;
+    height: 100%;
+  }
+}
+@-webkit-keyframes zoomin {
+  to {
+    width: 100%;
+    height: 100%;
+  }
+  from {
+    width: 94%;
+    height: 94%;
+  }
+}
+@-webkit-keyframes character-in {
+  to {
+    right: -30px;
+    clip: rect(0px, 350px, 580px, 0px);
+  }
+  from {
+    right: -70px;
+    clip: rect(0px, 310px, 580px, 0px);
+  }
+}
+@-webkit-keyframes character-out {
+  to {
+    right: -70px;
+    clip: rect(0px, 310px, 580px, 0px);
+  }
+  from {
+    right: -30px;
+    clip: rect(0px, 350px, 580px, 0px);
+  }
+}

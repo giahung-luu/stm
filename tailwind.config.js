@@ -13,6 +13,54 @@ module.exports = {
       ...colors,
     },
     extend: {
+      animation: {
+        "zoom-out": "zoomOut 0.2s forwards",
+        "character-in": "characterIn 0.2s forwards",
+        "zoom-in": "zoomIn 0.2s forwards",
+        "character-out": "characterOut 0.2s forwards",
+      },
+      keyframes: {
+        zoomOut: {
+          to: {
+            width: "94%",
+            height: "94%",
+          },
+          from: {
+            width: "100%",
+            height: "100%",
+          },
+        },
+        zoomIn: {
+          to: {
+            width: "100%",
+            height: "100%",
+          },
+          from: {
+            width: "94%",
+            height: "94%",
+          },
+        },
+        characterOut: {
+          to: {
+            right: "-70px",
+            clip: "rect(0px, 310px, 580px, 0px)",
+          },
+          from: {
+            right: "-30px",
+            clip: "rect(0px, 350px, 580px, 0px)",
+          },
+        },
+        characterIn: {
+          to: {
+            right: "-30px",
+            clip: "rect(0px, 350px, 580px, 0px)",
+          },
+          from: {
+            right: "-70px",
+            clip: "rect(0px, 310px, 580px, 0px)",
+          },
+        },
+      },
       minHeight: {
         "screen-75": "75vh",
       },

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { getQuestions } from "../services/listQuestion";
-import shuffle from "../lib/shuffle";
+import { getQuestions } from "../../services/listQuestion";
 
-function Arena({ questions }) {
+function ArenaByCharacter({ questions }) {
   const [current, setCurrent] = useState(0);
   const [cQuestion, setCQuestion] = useState(questions[0]);
   const [score, setScore] = useState(0);
@@ -23,7 +22,7 @@ function Arena({ questions }) {
   };
   return (
     <div className="Arena">
-      <h2 className="tw-text-center">Arena</h2>
+      <h2 className="tw-text-center"></h2>
       <div className="tw-container tw-mt-5">
         <div className="tw-flex tw-justify-center row">
           <div className="col-md-12 col-lg-12">
@@ -73,7 +72,7 @@ function Arena({ questions }) {
     </div>
   );
 }
-Arena.layout = "default";
+ArenaByCharacter.layout = "default";
 export async function getStaticProps() {
   const questions = await getQuestions();
   if (!questions) {
@@ -85,4 +84,4 @@ export async function getStaticProps() {
     props: { questions },
   };
 }
-export default Arena;
+export default ArenaByCharacter;
