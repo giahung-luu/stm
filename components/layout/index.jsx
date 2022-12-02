@@ -46,13 +46,13 @@ function Layout({ children }) {
                     </Link>
                   </li>
                   <li>
-                    <Link href="list-character">Danh Sách</Link>
+                    <Link href="/list-character">Danh Sách</Link>
                   </li>
                   <li>
                     <a href="mindmap">MindMap</a>
                   </li>
                   <li>
-                    <a href="arena">Arena</a>
+                    <Link href="/arena">Arena</Link>
                   </li>
                   <li>
                     <Link href="/profile">

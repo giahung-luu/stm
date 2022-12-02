@@ -1,40 +1,52 @@
-import { collection, addDoc, getDocs, query } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { database } from "../lib/firebase";
 const questionsRef = collection(database, "questions");
 
 export async function addQuestion(
-  character,
-  title,
-  point,
-  list_answer,
-  right_answer
+	character,
+	title,
+	point,
+	list_answer,
+	right_answer,
 ) {
-  try {
-    const docRef = await addDoc(collection(database, "questions"), {
-      character,
-      title,
-      point,
-      list_answer,
-      right_answer,
-    });
-    return docRef.id;
-  } catch (e) {
-    console.error("Error adding document: ", e);
-    return false;
-  }
+	try {
+		const docRef = await addDoc(collection(database, "questions"), {
+			character,
+			title,
+			point,
+			list_answer,
+			right_answer,
+		});
+		return docRef.id;
+	} catch (e) {
+		console.error("Error adding document: ", e);
+		return false;
+	}
 }
 
 export async function getQuestionsByIdCharacter(id) {
-  try {
-    const querySnapshot = await getDocs(
-      collection(database, "questions/" + id)
-    );
-    let questions = [];
-    querySnapshot.forEach((doc) => {
-      questions.push({ id: doc.id, ...doc.data() });
-    });
-    return questions;
-  } catch (e) {
-    return false;
-  }
+	try {
+		const q = query(questionsRef, where("character", "==", id));
+		const querySnapshot = await getDocs(q);
+		const questions = [];
+		querySnapshot.forEach((doc) => {
+			questions.push({ ...doc.data(), id: doc.id });
+		});
+		return questions;
+	} catch (e) {
+		return false;
+	}
+}
+
+export async function getQuestions() {
+	try {
+		const querySnapshot = await getDocs(collection(database, "questions"));
+		const questions = [];
+		querySnapshot.forEach((doc) => {
+			questions.push({ ...doc.data(), id: doc.id });
+		});
+		return questions;
+	} catch (e) {
+		return false;
+	}
 }

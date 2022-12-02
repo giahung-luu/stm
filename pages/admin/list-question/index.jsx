@@ -45,21 +45,17 @@ function ListQuestion({ color, questions, characters }) {
   return (
     <>
       <div
-        className={
-          "tw-relative tw-flex tw-flex-col tw-min-w-0 tw-break-words tw-w-full tw-b-6 tw-shadow-lg tw-rounded " +
-          (color === "light"
-            ? "tw-bg-white"
-            : "tw-bg-blueGray-700 tw-text-white")
-        }
+        className={`tw-relative tw-flex tw-flex-col tw-min-w-0 tw-break-words tw-w-full tw-b-6 tw-shadow-lg tw-rounded ${
+          color === "light" ? "tw-bg-white" : "tw-bg-blueGray-700 tw-text-white"
+        }`}
       >
         <div className="tw-rounded-t tw-mb-0 tw-px-4 tw-py-3 tw-border-0">
           <div className="tw-flex tw-flex-wrap tw-items-center tw-justify-between">
             <div className="tw-relative tw-w-full tw-px-4 tw-max-w-full tw-flex-grow tw-flex-1">
               <h3
-                className={
-                  "tw-font-semibold tw-text-lg " +
-                  (color === "light" ? "tw-text-blueGray-700" : "tw-text-white")
-                }
+                className={`tw-font-semibold tw-text-lg ${
+                  color === "light" ? "tw-text-blueGray-700" : "tw-text-white"
+                }`}
               >
                 Questions
               </h3>
@@ -108,12 +104,11 @@ function ListQuestion({ color, questions, characters }) {
                         className="tw-p-2 tw-ml-4"
                       >
                         <option value="">Chọn</option>
-                        {characters &&
-                          characters.map((item, index) => (
-                            <option value={item.id} key={index}>
-                              {item.name}
-                            </option>
-                          ))}
+                        {characters?.map((item, index) => (
+                          <option value={item.id} key={index}>
+                            {item.name}
+                          </option>
+                        ))}
                       </select>
                       <label htmlFor="title" class="tw-block">
                         Title
@@ -122,8 +117,8 @@ function ListQuestion({ color, questions, characters }) {
                         name="title"
                         rows="4"
                         className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-w-full"
-                        required
-                      ></textarea>
+                        required={true}
+                      />
                     </div>
                     <div>
                       <label htmlFor="point" className="tw-block">
@@ -133,7 +128,7 @@ function ListQuestion({ color, questions, characters }) {
                         type="number"
                         name="point"
                         className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-w-full"
-                        required
+                        required={true}
                       />
                     </div>
                     <div>
@@ -144,7 +139,7 @@ function ListQuestion({ color, questions, characters }) {
                           type="text"
                           name="a_answer"
                           className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
-                          required
+                          required={true}
                         />
                         <input
                           type="radio"
@@ -159,7 +154,7 @@ function ListQuestion({ color, questions, characters }) {
                           type="text"
                           name="b_answer"
                           className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
-                          required
+                          required={true}
                         />
                         <input
                           type="radio"
@@ -174,7 +169,7 @@ function ListQuestion({ color, questions, characters }) {
                           type="text"
                           name="c_answer"
                           className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
-                          required
+                          required={true}
                         />
                         <input
                           type="radio"
@@ -189,7 +184,7 @@ function ListQuestion({ color, questions, characters }) {
                           type="text"
                           name="d_answer"
                           className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
-                          required
+                          required={true}
                         />
                         <input
                           type="radio"
@@ -219,7 +214,7 @@ function ListQuestion({ color, questions, characters }) {
                 </form>
               </div>
             </div>
-            <div className="tw-opacity-25 tw-fixed tw-inset-0 tw-z-40 tw-bg-black"></div>
+            <div className="tw-opacity-25 tw-fixed tw-inset-0 tw-z-40 tw-bg-black" />
           </>
         ) : null}
         <div className="tw-block tw-w-full tw-overflow-x-auto">
@@ -228,102 +223,95 @@ function ListQuestion({ color, questions, characters }) {
             <thead>
               <tr>
                 <th
-                  className={
-                    "tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left " +
-                    (color === "light"
+                  className={`tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left ${
+                    color === "light"
                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500"
+                  }`}
                 >
                   STT
                 </th>
                 <th
-                  className={
-                    "tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left " +
-                    (color === "light"
+                  className={`tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left ${
+                    color === "light"
                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500"
+                  }`}
                 >
                   Title
                 </th>
                 <th
-                  className={
-                    "tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left " +
-                    (color === "light"
+                  className={`tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left ${
+                    color === "light"
                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500"
+                  }`}
                 >
                   Point
                 </th>
                 <th
-                  className={
-                    "tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left " +
-                    (color === "light"
+                  className={`tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left ${
+                    color === "light"
                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500"
+                  }`}
                 >
                   Right Answer
                 </th>
 
                 <th
-                  className={
-                    "tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left " +
-                    (color === "light"
+                  className={`tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left ${
+                    color === "light"
                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500"
+                  }`}
                 >
                   Completion
                 </th>
                 <th
-                  className={
-                    "tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left " +
-                    (color === "light"
+                  className={`tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left ${
+                    color === "light"
                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                ></th>
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500"
+                  }`}
+                />
               </tr>
             </thead>
             <tbody>
-              {questions &&
-                questions.map((item, index) => (
-                  <tr key={item.id}>
-                    <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs whitespace-nowrap p-4 text-left flex items-center">
-                      {index + 1}
-                    </th>
-                    <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-p-4">
-                      {item.title}
-                    </td>
-                    <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                      {item.point}
-                    </td>
-                    <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                      <span className="tw-font-bold tw-text-center tw-uppercase">
-                        {item.right_answer}
-                      </span>
-                    </td>
-                    <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                      <div className="tw-flex tw-items-center">
-                        <span className="tw-mr-2">60%</span>
-                        <div className="tw-relative tw-w-full">
-                          <div className="tw-overflow-hidden tw-h-2 tw-text-xs tw-flex tw-rounded tw-bg-red-200">
-                            <div
-                              style={{ width: "60%" }}
-                              className="tw-shadow-none tw-flex tw-flex-col tw-text-center tw-whitespace-nowrap tw-text-white tw-justify-center tw-bg-red-500"
-                            ></div>
-                          </div>
+              {questions?.map((item, index) => (
+                <tr key={item.id}>
+                  <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs whitespace-nowrap p-4 text-left flex items-center">
+                    {index + 1}
+                  </th>
+                  <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-p-4">
+                    {item.title}
+                  </td>
+                  <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
+                    {item.point}
+                  </td>
+                  <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
+                    <span className="tw-font-bold tw-text-center tw-uppercase">
+                      {item.right_answer}
+                    </span>
+                  </td>
+                  <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
+                    <div className="tw-flex tw-items-center">
+                      <span className="tw-mr-2">60%</span>
+                      <div className="tw-relative tw-w-full">
+                        <div className="tw-overflow-hidden tw-h-2 tw-text-xs tw-flex tw-rounded tw-bg-red-200">
+                          <div
+                            style={{ width: "60%" }}
+                            className="tw-shadow-none tw-flex tw-flex-col tw-text-center tw-whitespace-nowrap tw-text-white tw-justify-center tw-bg-red-500"
+                          />
                         </div>
                       </div>
-                    </td>
-                    <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-right">
-                      {/* <TableDropdown /> */}
-                    </td>
-                  </tr>
-                ))}
+                    </div>
+                  </td>
+                  <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-right">
+                    {/* <TableDropdown /> */}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
