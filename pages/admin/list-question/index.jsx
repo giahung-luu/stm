@@ -2,14 +2,17 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { addQuestion, getQuestions } from "../../../services/listQuestion";
+import { getCharacters } from "../../../services/characterService";
 import { notify } from "../../../components";
-function ListQuestion({ color, questions }) {
+import Character from "../../character/Characters";
+function ListQuestion({ color, questions, characters }) {
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
 
   const handleAddQuestion = (e) => {
     e.preventDefault();
     const {
+      character,
       title,
       point,
       a_answer,
@@ -18,17 +21,24 @@ function ListQuestion({ color, questions }) {
       d_answer,
       right_answer,
     } = e.target;
-    const result = addQuestion(
-      title.value,
-      point.value,
-      [a_answer.value, b_answer.value, c_answer.value, d_answer.value],
-      right_answer.value
-    );
-    if (result) {
-      setShowModal(false);
-      notify("Thêm câu hỏi thành công", "success");
+    if (!character.value) {
+      alert("Vui lòng chọn nhân vật cho câu hỏi!");
+    } else if (!right_answer.value) {
+      alert("Vui lòng chọn đáp án đúng cho câu hỏi!");
     } else {
-      notify("Thêm câu hỏi thất bại", "error");
+      const result = addQuestion(
+        character.value,
+        title.value,
+        point.value,
+        [a_answer.value, b_answer.value, c_answer.value, d_answer.value],
+        right_answer.value
+      );
+      if (result) {
+        setShowModal(false);
+        notify("Thêm câu hỏi thành công", "success");
+      } else {
+        notify("Thêm câu hỏi thất bại", "error");
+      }
     }
   };
 
@@ -89,6 +99,22 @@ function ListQuestion({ color, questions }) {
                   {/*body*/}
                   <div className="tw-relative tw-p-6 tw-flex-auto">
                     <div>
+                      <label htmlFor="character" className="tw-mr-4">
+                        Nhân vật
+                      </label>
+                      <select
+                        name="character"
+                        id="character"
+                        className="tw-p-2 tw-ml-4"
+                      >
+                        <option value="">Chọn</option>
+                        {characters &&
+                          characters.map((item, index) => (
+                            <option value={item.id} key={index}>
+                              {item.name}
+                            </option>
+                          ))}
+                      </select>
                       <label htmlFor="title" class="tw-block">
                         Title
                       </label>
@@ -96,6 +122,7 @@ function ListQuestion({ color, questions }) {
                         name="title"
                         rows="4"
                         className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-w-full"
+                        required
                       ></textarea>
                     </div>
                     <div>
@@ -106,6 +133,7 @@ function ListQuestion({ color, questions }) {
                         type="number"
                         name="point"
                         className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-w-full"
+                        required
                       />
                     </div>
                     <div>
@@ -116,6 +144,7 @@ function ListQuestion({ color, questions }) {
                           type="text"
                           name="a_answer"
                           className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
+                          required
                         />
                         <input
                           type="radio"
@@ -130,6 +159,7 @@ function ListQuestion({ color, questions }) {
                           type="text"
                           name="b_answer"
                           className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
+                          required
                         />
                         <input
                           type="radio"
@@ -144,6 +174,7 @@ function ListQuestion({ color, questions }) {
                           type="text"
                           name="c_answer"
                           className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
+                          required
                         />
                         <input
                           type="radio"
@@ -158,6 +189,7 @@ function ListQuestion({ color, questions }) {
                           type="text"
                           name="d_answer"
                           className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-flex-grow"
+                          required
                         />
                         <input
                           type="radio"
@@ -312,13 +344,14 @@ ListQuestion.propTypes = {
 
 export async function getStaticProps() {
   const questions = await getQuestions();
+  const characters = await getCharacters();
   if (!questions) {
     return {
       notFound: true,
     };
   }
   return {
-    props: { questions },
+    props: { questions, characters },
   };
 }
 

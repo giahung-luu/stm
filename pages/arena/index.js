@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getCharacters } from "../../services/characterService";
 function Arena({ characters }) {
   return (
@@ -6,12 +7,14 @@ function Arena({ characters }) {
       <div className="tw-grid lg:tw-grid-cols-3 md:tw-grid-cols-2 tw-grid-cols-1 tw-gap-6 tw-mt-6">
         {characters &&
           characters.map((item, index) => (
-            <div className="tw-col-span-1 tw-overflow-hidden" key={index}>
+            <Link className="tw-col-span-1 tw-overflow-hidden" key={index} href={
+              `/arena/${item.id}`
+            }>
               <div className="card-container">
                 <div className="card-background">
                   <div id="particles-js">
                     <div className="character-image">
-                      <div className="image">
+                      <div className="image tw-rounded">
                         <img src={item.img} />
                       </div>
                     </div>
@@ -21,7 +24,7 @@ function Arena({ characters }) {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
       </div>
     </div>

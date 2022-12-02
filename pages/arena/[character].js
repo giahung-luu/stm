@@ -1,25 +1,34 @@
 import { useState, useEffect } from "react";
-import { getQuestions } from "../../services/listQuestion";
+import { useRouter } from 'next/router'
+import { getQuestionsByIdCharacter } from "../../services/listQuestion";
 
-function ArenaByCharacter({ questions }) {
-  const [current, setCurrent] = useState(0);
-  const [cQuestion, setCQuestion] = useState(questions[0]);
-  const [score, setScore] = useState(0);
-  const [showScore, setShowScore] = useState(false);
+function ArenaByCharacter() {
+  const router = useRouter();
+  const {character} = router.query;
+
+  // const [current, setCurrent] = useState(0);
+  const [cQuestion, setCQuestion] = useState([]);
+  // const [score, setScore] = useState(0);
+  // const [showScore, setShowScore] = useState(false);
 
   useEffect(() => {
-    setCQuestion(questions[current]);
-  }, [current]);
-
-  const handleChooseAnswer = (index) => {
-    const compare = ["a", "b", "c", "d"];
-    if (compare[index] == cQuestion.right_answer) setScore((prev) => prev + 1);
-    const nextQuestion = cQuestion + 1;
-    if (current < questions.length - 1) setCurrent((prev) => prev + 1);
-    else {
-      setShowScore(true);
+    const fetchQuestion = async() =>{
+      const questions = await getQuestionsByIdCharacter(character);
+      return questions;
     }
-  };
+    fetchQuestion().then((data)=>console.log(data)).catch(err=>console.log(err))
+    // setCQuestion(questions[current]);
+  }, []);
+
+  // const handleChooseAnswer = (index) => {
+  //   const compare = ["a", "b", "c", "d"];
+  //   if (compare[index] == cQuestion.right_answer) setScore((prev) => prev + 1);
+  //   const nextQuestion = cQuestion + 1;
+  //   if (current < questions.length - 1) setCurrent((prev) => prev + 1);
+  //   else {
+  //     setShowScore(true);
+  //   }
+  // };
   return (
     <div className="Arena">
       <h2 className="tw-text-center"></h2>
@@ -30,15 +39,15 @@ function ArenaByCharacter({ questions }) {
               <div className="question tw-bg-gray-700 tw-p-3 border-bottom">
                 <div className="tw-flex flex-row tw-justify-between tw-items-center mcq tw-text-white">
                   <h4>MCQ Quiz</h4>
-                  {!showScore && (
+                  {/* {!showScore && (
                     <span>
                       ({questions.indexOf(cQuestion) + 1} of {questions.length})
                     </span>
-                  )}
+                  )} */}
                 </div>
               </div>
               <div className="question tw-bg-gray-600 tw-p-3 border-bottom">
-                {showScore ? (
+                {/* {showScore ? (
                   <div className="tw-text-white tw-text-center">
                     Your score is{" "}
                     <span className="tw-text-[#e75e8d]">{score}</span> out of{" "}
@@ -62,7 +71,7 @@ function ArenaByCharacter({ questions }) {
                       ))}
                     </div>
                   </>
-                )}
+                )} */}
               </div>
               <div className="tw-flex flex-row tw-justify-between tw-items-center p-3 tw-bg-gray-700"></div>
             </div>
@@ -73,15 +82,5 @@ function ArenaByCharacter({ questions }) {
   );
 }
 ArenaByCharacter.layout = "default";
-export async function getStaticProps() {
-  const questions = await getQuestions();
-  if (!questions) {
-    return {
-      notFound: true,
-    };
-  }
-  return {
-    props: { questions },
-  };
-}
+
 export default ArenaByCharacter;

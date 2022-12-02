@@ -1,10 +1,17 @@
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, query } from "firebase/firestore";
 import { database } from "../lib/firebase";
 const questionsRef = collection(database, "questions");
 
-export async function addQuestion(title, point, list_answer, right_answer) {
+export async function addQuestion(
+  character,
+  title,
+  point,
+  list_answer,
+  right_answer
+) {
   try {
     const docRef = await addDoc(collection(database, "questions"), {
+      character,
       title,
       point,
       list_answer,
@@ -17,9 +24,11 @@ export async function addQuestion(title, point, list_answer, right_answer) {
   }
 }
 
-export async function getQuestions() {
+export async function getQuestionsByIdCharacter(id) {
   try {
-    const querySnapshot = await getDocs(collection(database, "questions"));
+    const querySnapshot = await getDocs(
+      collection(database, "questions/" + id)
+    );
     let questions = [];
     querySnapshot.forEach((doc) => {
       questions.push({ id: doc.id, ...doc.data() });
