@@ -16,7 +16,7 @@ function Arena({ characters }) {
                 <div id="particles-js">
                   <div className="character-image">
                     <div className="image tw-rounded">
-                      <img src={item.img} />
+                      <img src={item.img} alt={item.name} />
                     </div>
                   </div>
                   <div className="character-information">
