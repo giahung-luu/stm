@@ -47,12 +47,15 @@ function ArenaByCharacter({ params }) {
     if (current < questions.length - 1) {
       setCurrent((prev) => prev + 1);
     } else {
-      router.push({
-        pathname: "/arena/result",
-        query: {
-          answers: JSON.stringify(answers),
+      router.push(
+        {
+          pathname: "/arena/result",
+          query: {
+            answers: JSON.stringify(answers),
+          },
         },
-      });
+        "/arena/result"
+      );
     }
   };
 
