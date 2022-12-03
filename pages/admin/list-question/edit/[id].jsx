@@ -79,18 +79,20 @@ function EditQuestion({ params }) {
                 <label htmlFor="character" className="tw-mr-4">
                   Nhân vật
                 </label>
-                <select
-                  name="character"
-                  id="character"
-                  className="tw-p-2 tw-ml-4"
-                  defaultValue={question.character}
-                >
-                  {characters?.map((item, index) => (
-                    <option value={item.id} key={index}>
-                      {item.name}
-                    </option>
-                  ))}
-                </select>
+                {question.character && (
+                  <select
+                    name="character"
+                    id="character"
+                    className="tw-p-2 tw-ml-4"
+                    defaultValue={question.character}
+                  >
+                    {characters?.map((item, index) => (
+                      <option value={item.id} key={index}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                )}
                 <label htmlFor="title" className="tw-block">
                   Title
                 </label>
@@ -202,7 +204,7 @@ function EditQuestion({ params }) {
   );
 }
 EditQuestion.layout = "admin";
-export async function getServerSideProps(context) {
+export function getServerSideProps(context) {
   return {
     props: { params: context.params },
   };
