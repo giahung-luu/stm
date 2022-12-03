@@ -4,7 +4,6 @@ import Link from "next/link";
 import { addQuestion, getQuestions } from "../../../services/listQuestion";
 import { getCharacters } from "../../../services/characterService";
 import { notify } from "../../../components";
-import Character from "../../character/Characters";
 function ListQuestion({ color, questions, characters }) {
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
@@ -266,7 +265,7 @@ function ListQuestion({ color, questions, characters }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500"
                   }`}
                 >
-                  Completion
+                  Action
                 </th>
                 <th
                   className={`tw-px-6 tw-align-middle tw-border tw-border-solid tw-py-3 tw-text-xs tw-uppercase tw-border-l-0 tw-border-r-0 tw-whitespace-nowrap tw-font-semibold tw-text-left ${
@@ -295,17 +294,22 @@ function ListQuestion({ color, questions, characters }) {
                     </span>
                   </td>
                   <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
-                    <div className="tw-flex tw-items-center">
-                      <span className="tw-mr-2">60%</span>
-                      <div className="tw-relative tw-w-full">
-                        <div className="tw-overflow-hidden tw-h-2 tw-text-xs tw-flex tw-rounded tw-bg-red-200">
-                          <div
-                            style={{ width: "60%" }}
-                            className="tw-shadow-none tw-flex tw-flex-col tw-text-center tw-whitespace-nowrap tw-text-white tw-justify-center tw-bg-red-500"
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    <Link href={`/admin/list-question/edit/${item.id}`}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="tw-w-6 tw-h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                        />
+                      </svg>
+                    </Link>
                   </td>
                   <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-right">
                     {/* <TableDropdown /> */}
@@ -321,7 +325,7 @@ function ListQuestion({ color, questions, characters }) {
 }
 
 ListQuestion.layout = "admin";
-ListQuestion.layout = "admin";
+
 ListQuestion.defaultProps = {
   color: "light",
 };
