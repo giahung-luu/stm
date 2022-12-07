@@ -49,7 +49,7 @@ function Layout({ children }) {
                     <Link href="/list-character">Danh Sách</Link>
                   </li>
                   <li>
-                    <a href="mindmap">MindMap</a>
+                    <Link href="/mindmap">MindMap</Link>
                   </li>
                   <li>
                     <Link href="/arena">Arena</Link>
