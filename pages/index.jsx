@@ -15,7 +15,7 @@ export default function Home() {
                 <em>INTRODUCTION</em> HISTORY MIND MAP HERE
               </h4>
               <div className="main-button">
-                <a href="mindmap.html">Học Ngay</a>
+                <a href="/mindmap">Học Ngay</a>
               </div>
             </div>
           </div>
