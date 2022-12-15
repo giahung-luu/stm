@@ -80,7 +80,7 @@ function ArenaByCharacter({ params }) {
                     {cQuestion.length !== 0 &&
                       cQuestion?.list_answer.map((answer, index) => (
                         <button
-                          className="tw-col-span-1 tw-border-2 tw-border-[#e75e8d] tw-rounded-md tw-py-4 tw-px-6 tw-bg-[#e75e8d] tw-text-white hover:tw-text-[#e75e8d] hover:tw-bg-transparent tw-transition-colors tw-duration-300 tw-ease-in-out first-letter:tw-uppercase"
+                          className="tw-col-span-1 tw-border-2 tw-border-[#e75e8d] tw-rounded-md tw-py-4 tw-px-6 tw-bg-[#e75e8d] tw-text-white hover:tw-text-[#e75e8d] hover:tw-bg-transparent tw-transition-colors tw-duration-300 tw-ease-in-out first-letter:tw-uppercase tw-w-full"
                           key={index}
                           onClick={() => handleChooseAnswer(index)}
                         >

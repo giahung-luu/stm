@@ -33,7 +33,7 @@ function Result({ answers }) {
                 {ans.list_answer.map((answer, index) => (
                   <li
                     key={index}
-                    className={`tw-text-white ${
+                    className={`tw-text-white tw-list-[lower-latin] ${
                       ans.choose === index ? "tw-text-[#e75e8d]" : ""
                     }`}
                   >

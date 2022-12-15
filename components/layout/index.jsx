@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { auth } from "../../lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Search from "./Search";
 
 function Layout({ children }) {
+  const router = useRouter();
   const [userCurrent, setUserCurrent] = useState();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -41,18 +43,38 @@ function Layout({ children }) {
 
                 <ul className="nav">
                   <li>
-                    <Link href="/" className="active">
+                    <Link
+                      href="/"
+                      className={router.pathname === "/" ? "active" : ""}
+                    >
                       Home
                     </Link>
                   </li>
                   <li>
-                    <Link href="/list-character">Danh Sách</Link>
+                    <Link
+                      href="/list-character"
+                      className={
+                        router.pathname === "/list-character" ? "active" : ""
+                      }
+                    >
+                      Danh Sách
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/mindmap">MindMap</Link>
+                    <Link
+                      href="/mindmap"
+                      className={router.pathname === "/mindmap" ? "active" : ""}
+                    >
+                      MindMap
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/arena">Arena</Link>
+                    <Link
+                      href="/arena"
+                      className={router.pathname === "/arena" ? "active" : ""}
+                    >
+                      Arena
+                    </Link>
                   </li>
                   <li>
                     <Link href="/profile">

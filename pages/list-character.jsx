@@ -6,6 +6,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { Button, Pagination } from "react-bootstrap";
 import Characters from "./character/Characters";
 import { getCharacters } from "../services/characterService";
+import { eventYear } from "../lib/store";
+import { getCharactersByYearRange } from "../services/characterService";
 function ListCharacter({ totalPostCount }) {
   const router = useRouter();
   const [characters, setCharacters] = React.useState([]);
@@ -16,11 +18,11 @@ function ListCharacter({ totalPostCount }) {
   const arrayPage = Array.from(Array(totalPage).keys());
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        router.push("auth/signin");
-      }
-    });
+    // onAuthStateChanged(auth, (user) => {
+    //   if (!user) {
+    //     router.push("auth/signin");
+    //   }
+    // });
   }, [auth]);
 
   useEffect(() => {
@@ -39,17 +41,53 @@ function ListCharacter({ totalPostCount }) {
     </Pagination.Item>
   ));
 
+  const eventChange = (e) => {
+    const start =
+      e.target.options[e.target.selectedIndex].getAttribute("attr-start");
+    const end =
+      e.target.options[e.target.selectedIndex].getAttribute("attr-end");
+    getCharactersByYearRange(start, end)
+      .then((data) => {
+        setCharacters(data);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <>
       <div className="row list-character-page">
         <Head>
           <title>List Character</title>
         </Head>
-        <Characters
-          character1={characters[(page + 1) * itemPerPage - 3]}
-          character2={characters[(page + 1) * itemPerPage - 2]}
-          character3={characters[(page + 1) * itemPerPage - 1]}
-        />
+        <div className="col-lg-8">
+          <div className="featured-games header-text" style={{ width: "140%" }}>
+            <div className="heading-section">
+              <h4>
+                <em>Nhân Vật</em> <span className="">Lịch Sử</span>
+                <select
+                  className="tw-mt-3 tw-rounded tw-pl-2 tw-pr-5 focus:tw-outline-none tw-w-full tw-py-1 tw-text-2xl"
+                  onChange={eventChange}
+                >
+                  {eventYear.map((item, index) => (
+                    <option
+                      key={index}
+                      value=""
+                      attr-start={item.startTime}
+                      attr-end={item.endTime}
+                      className="tw-text-2xl"
+                    >
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+              </h4>
+            </div>
+            <Characters
+              character1={characters[(page + 1) * itemPerPage - 3]}
+              character2={characters[(page + 1) * itemPerPage - 2]}
+              character3={characters[(page + 1) * itemPerPage - 1]}
+            />
+          </div>
+        </div>
       </div>
       <Button onClick={() => console.log(characters)}>Test 2</Button>
       <Pagination style={{ justifyContent: "center" }}>{items}</Pagination>
