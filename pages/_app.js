@@ -12,7 +12,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "react-toastify/dist/ReactToastify.min.css";
 import "../styles/globals.css";
 import "../styles/jsmind.css";
-import "../styles/mindmap.css";
 function MyApp({ Component, pageProps }) {
   let LayoutRender = Component.layout === "default" ? Layout : React.Fragment;
   LayoutRender = Component.layout === "admin" ? AdminLayout : LayoutRender;
