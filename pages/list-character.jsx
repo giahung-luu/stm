@@ -89,7 +89,7 @@ function ListCharacter({ totalPostCount }) {
           </div>
         </div>
       </div>
-      <Button onClick={() => console.log(characters)}>Test 2</Button>
+
       <Pagination style={{ justifyContent: "center" }}>{items}</Pagination>
     </>
   );

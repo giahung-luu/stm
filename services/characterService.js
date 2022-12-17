@@ -70,7 +70,8 @@ export async function getCharactersByYearRange(start, end) {
         (character.born >= start && character.dead <= end) ||
         (end - character.born <= 100 &&
           end - character.born >= 0 &&
-          character.dead >= start)
+          character.dead >= start) ||
+        (character.dead >= start && character.dead <= end)
       ) {
         characters.push({ id: doc.id, ...character });
       }

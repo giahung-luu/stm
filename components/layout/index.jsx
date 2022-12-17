@@ -111,7 +111,7 @@ function Layout({ children }) {
               <p>
                 Copyright © 202 <a href="#">STM - HISTORY LEARNING</a> Company.
                 All rights reserved.
-                <br />
+                {/* <br />
                 Design:{" "}
                 <a
                   href="https://templatemo.com"
@@ -123,7 +123,7 @@ function Layout({ children }) {
                 Distributed By{" "}
                 <a href="https://themewagon.com" target="_blank">
                   ThemeWagon
-                </a>
+                </a> */}
               </p>
             </div>
           </div>
