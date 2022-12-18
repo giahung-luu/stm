@@ -25,8 +25,7 @@ const Character = (props) => {
 
   return (
     <tr>
-      <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-left tw-flex tw-items-center">
-        {  
+      <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-left tw-flex tw-items-center"> 
         <span
           className={
             "tw-ml-3 tw-font-bold " +
