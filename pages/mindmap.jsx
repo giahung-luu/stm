@@ -53,6 +53,7 @@ function Mindmap({ nodes }) {
         console.log(nodes.length + " " + index);
       }
     }
+    jm.current.disable_edit();
   });
   return (
     <>
