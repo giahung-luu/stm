@@ -14,7 +14,6 @@ var mind = {
       id: "root",
       isroot: true,
       topic: "Lịch sử 12",
-      linkurl: "/post/lichsu12tomtat",
     },
   ],
 };
@@ -33,41 +32,33 @@ const styles = {
   height: "600px",
   borderRadius: "23px",
 };
-var mindmap;
 function Mindmap({ nodes }) {
-  //------------------------------------------------------------------//
   const jm = useRef();
   useEffect(() => {
-    mindmap = nodes;
-    console.log(mindmap);
     jm.current = new window.jsMind(options);
     jm.current.show(mind);
-    // nodes.forEach(e => {
-    //   if (e.parent_id == "root")
-    //     jm.current.add_node(parent_id, root_id, topic);
-    // });
-    jm.current.add_node(
-      "root",
-      "root1",
-      "Lịch sử thế giới hiện đại (1945-2000)"
-    );
-    jm.current.add_node("root", "root2", "Lịch sử Việt Nam(1919-2000)");
-    // jm.current.add_node('root1', 'sub1', 'Thế chiến thứ hai', { 'linkurl': 'https://www.google.com/' });
-    // jm.current.add_node('root1', 'sub5', 'Mĩ, Tây Âu, Nhật Bản (1945 - 2000)');
-    // jm.current.add_node('root1', 'sub6', 'Cách mạng khoa học - công nghệ và xu thế toàn cầu hóa');
-    // jm.current.add_node('root1', 'sub7', 'Mĩ, Tây Âu, Nhật Bản (1945 - 2000)');
-
-    nodes.forEach((e) => {
-      // if (e.parent_id == "root")
-      jm.current.add_node(e.parent_id, e.root_id, e.topic);
-    });
-    // jm.current.pause_click_handle();
+    var parent_array = ["root"];
+    for (let index = 0; index < nodes.length; index++) {
+      if (parent_array.includes(nodes[index].parent_id)) {
+        // Add node
+        var linkurl = '/post/' + nodes[index].id;
+        jm.current.add_node(nodes[index].parent_id, nodes[index].root_id, nodes[index].topic, {
+          'linkurl': linkurl
+        });
+        // Add parent
+        parent_array.push(nodes[index].root_id);
+        // Pop nodes
+        nodes.splice(index, 1);
+        index = -1;
+        console.log(nodes.length + " " + index);
+      }
+    }
   });
   return (
     <>
       <Head>
         <title>Mindmap</title>
-        <link rel="stylesheet" href="./css/jsmind.css" />
+        <link rel="stylesheet" href="./css/mindmap.css" />
       </Head>
       <div className="mindmap" style={{ height: "600px" }}>
         <div id="jsmind_container" style={styles}></div>

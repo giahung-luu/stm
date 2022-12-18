@@ -5,10 +5,7 @@ export default function Document() {
     <Html>
       <Head>
         <script type="text/javascript" src="js/jsmind.js"></script>
-        <script
-          type="text/javascript"
-          src="js/jsmind.draggable-node.js"
-        ></script>
+        <script type="text/javascript" src="js/jsmind.draggable-node.js"></script>
         <script type="text/javascript" src="js/jsmind.screenshot.js"></script>
       </Head>
       <body>

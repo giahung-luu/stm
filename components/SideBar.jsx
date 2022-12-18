@@ -139,6 +139,50 @@ export default function Sidebar() {
                   List Question
                 </Link>
               </li>
+              <li className="tw-items-center">
+                <Link
+                  href="/admin/mindmap"
+                  className={
+                    "tw-text-xs tw-uppercase tw-py-3 tw-font-bold tw-block " +
+                    (router.pathname.indexOf("/admin/mindmap") !== -1
+                      ? "tw-text-lightBlue-500 hover:tw-text-lightBlue-600"
+                      : "tw-text-blueGray-700 hover:tw-text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={
+                      "fas fa-diagram-project tw-mr-2 tw-text-sm " +
+                      (router.pathname.indexOf("/admin/mindmap") !== -1
+                        ? "tw-opacity-75"
+                        : "tw-text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Mind Map
+                </Link>
+              </li>
+
+              <li className="tw-items-center">
+                <Link
+                  href="/admin/topic"
+                  className={
+                    "tw-text-xs tw-uppercase tw-py-3 tw-font-bold tw-block " +
+                    (router.pathname.indexOf("/admin/topic") !== -1
+                      ? "tw-text-lightBlue-500 hover:tw-text-lightBlue-600"
+                      : "tw-text-blueGray-700 hover:tw-text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={
+                      "fas fa-solid fa-pager tw-mr-2 tw-text-sm " +
+                      (router.pathname.indexOf("/admin/topic") !== -1
+                        ? "tw-opacity-75"
+                        : "tw-text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Topic
+                </Link>
+              </li>
+
             </ul>
 
             {/* Divider */}
