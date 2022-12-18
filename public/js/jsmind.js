@@ -1103,15 +1103,17 @@
             if (!this.options.default_event_handle['enable_click_handle']) {
                 return;
             }
-            var element = e.target || event.srcElement;
+            var element = e.target || event.srcElement;          
+            var isexpander = this.view.is_expander(element);
 
             var nodeid = this.view.get_binded_nodeid(element);
-            if (!!nodeid) {
+            if (!!nodeid && isexpander == false) {
                 // Mở link topic của node bằng linkurl
                 if (open_click_handle && this.view.selected_node.data.linkurl != null)
                     window.open(this.view.selected_node.data.linkurl);
             }
-            var isexpander = this.view.is_expander(element);
+
+
             if (isexpander) {
                 var nodeid = this.view.get_binded_nodeid(element);
                 if (!!nodeid) {
