@@ -346,5 +346,14 @@ export async function getStaticProps() {
     props: { questions, characters },
   };
 }
-
+export async function deleteQuestion(id) {
+  try {
+    await deleteQuestion(doc(database, "questions", id));
+    return {
+      id,
+    };
+  } catch (e) {
+    return e;
+  }
+}
 export default ListQuestion;
