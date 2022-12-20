@@ -95,3 +95,12 @@ export async function getQuestionById(id) {
     return false;
   }
 }
+export async function deleteQuestion(id) {
+  try {
+    const docRef = await deleteDoc(doc(database, "questions", id));
+    return docRef.id;
+  } catch (e) {
+    console.error("Error delete document: ", e);
+    return false;
+  }
+}
