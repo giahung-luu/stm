@@ -6,6 +6,7 @@ import {
   where,
   doc,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { database } from "../lib/firebase";
 const questionsRef = collection(database, "questions");
@@ -96,9 +97,10 @@ export async function getQuestionById(id) {
   }
 }
 export async function deleteQuestion(id) {
+  console.log(id);
   try {
     const docRef = await deleteDoc(doc(database, "questions", id));
-    return docRef.id;
+    return docRef;
   } catch (e) {
     console.error("Error delete document: ", e);
     return false;
