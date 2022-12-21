@@ -25,8 +25,7 @@ const Character = (props) => {
 
   return (
     <tr>
-      <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-left tw-flex tw-items-center"> 
-      {
+      <th className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4 tw-text-left tw-flex tw-items-center">
         <span
           className={
             "tw-ml-3 tw-font-bold " +
@@ -39,18 +38,22 @@ const Character = (props) => {
       <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs p-4">
         {character.description}
       </td>
+
       <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
         <i className="tw-fas tw-fa-circle tw-text-orange-500 tw-mr-2"></i>{" "}
         <img src={character.img} alt={character.name} />
       </td>
       <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs p-4">
+        {character.born}
+      </td>
+      <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs p-4">
+        {character.dead}
+      </td>
+      <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs p-4">
         {character.detail_description}
       </td>
       <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs p-4">
-        {character.time_start}
-      </td>
-      <td className="tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs p-4">
-        {character.time_end}
+        {character.event}
       </td>
       <td className="tw-order-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-whitespace-nowrap tw-p-4">
         <div

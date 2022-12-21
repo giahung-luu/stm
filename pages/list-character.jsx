@@ -18,11 +18,11 @@ function ListCharacter({ totalPostCount }) {
   const arrayPage = Array.from(Array(totalPage).keys());
 
   useEffect(() => {
-    // onAuthStateChanged(auth, (user) => {
-    //   if (!user) {
-    //     router.push("auth/signin");
-    //   }
-    // });
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        // router.push("auth/signin");
+      }
+    });
   }, [auth]);
 
   useEffect(() => {

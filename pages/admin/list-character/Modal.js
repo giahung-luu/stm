@@ -13,8 +13,9 @@ const Modal = ({ selectedCharacter, setCharacters, setShowModal }) => {
     description: selectedCharacter?.description || "",
     img: selectedCharacter?.img || "",
     detail_description: selectedCharacter?.detail_description || "",
-    time_start: selectedCharacter?.time_start || "",
-    time_end: selectedCharacter?.time_end || "",
+    born: selectedCharacter?.born || "",
+    dead: selectedCharacter?.dead || "",
+    event: selectedCharacter?.event || "",
   });
   const handleAddCharacter = async (e) => {
     e.preventDefault();
@@ -121,7 +122,7 @@ const Modal = ({ selectedCharacter, setCharacters, setShowModal }) => {
                 />
               </div>
               <div>
-                <label htmlFor="img" className="tw-block">
+                <label htmlFor="detail_description" className="tw-block">
                   Description Detail
                 </label>
                 <textarea
@@ -139,36 +140,54 @@ const Modal = ({ selectedCharacter, setCharacters, setShowModal }) => {
                 />
               </div>
               <div>
-                <label htmlFor="img" className="tw-block">
-                  Time Start
+                <label htmlFor="event" className="tw-block">
+                  Event
                 </label>
-                <input
-                  type="text"
-                  name="time_start"
-                  id="time_start"
-                  value={character.time_start}
+                <textarea
+                  name="event"
+                  rows="4"
+                  id="detail"
+                  value={character.event}
                   onChange={(e) =>
                     setCharacter({
                       ...character,
-                      time_start: e.target.value,
+                      event: e.target.value,
                     })
                   }
                   className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-w-full"
                 />
               </div>
               <div>
-                <label htmlFor="img" className="tw-block">
-                  Time End
+                <label htmlFor="born" className="tw-block">
+                  Born
                 </label>
                 <input
                   type="text"
-                  name="time_end"
-                  id="time_end"
-                  value={character.time_end}
+                  name="born"
+                  id="born"
+                  value={character.born}
                   onChange={(e) =>
                     setCharacter({
                       ...character,
-                      time_end: e.target.value,
+                      born: e.target.value,
+                    })
+                  }
+                  className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-w-full"
+                />
+              </div>
+              <div>
+                <label htmlFor="dead" className="tw-block">
+                  Dead
+                </label>
+                <input
+                  type="text"
+                  name="dead"
+                  id="dead"
+                  value={character.dead}
+                  onChange={(e) =>
+                    setCharacter({
+                      ...character,
+                      dead: e.target.value,
                     })
                   }
                   className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-w-full"
