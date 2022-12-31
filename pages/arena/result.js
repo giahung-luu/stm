@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-
+import { useRouter } from "next/router";
+import Link from "next/link";
 function Result({ answers }) {
   const compare = ["a", "b", "c", "d"];
   const [score, setScore] = useState(0);
-
+  const router = useRouter();
   useEffect(() => {
     if (answers) {
       const ans = JSON.parse(answers);
@@ -17,6 +18,27 @@ function Result({ answers }) {
   console.log(JSON.parse(answers));
   return (
     <div>
+      <div className=" tw-text-white tw-py-4  ">
+        <Link
+          href="/arena"
+          className={router.pathname === "/arena" ? "active" : ""}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="tw-w-6 tw-h-6 "
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+            />
+          </svg>
+        </Link>
+      </div>
       <h1>Result</h1>
       <p>
         Your score is: <span className="tw-text-[#e75e8d]">{score}</span>

@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import { auth } from "../lib/firebase";
 
@@ -43,3 +44,12 @@ export const getAuthState = () =>
       return "hello";
     }
   });
+// export const signOut = (callback) => {
+//   signOut(auth)
+//     .then(() => {
+//       callback();
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };

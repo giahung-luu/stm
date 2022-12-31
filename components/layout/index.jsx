@@ -79,13 +79,21 @@ function Layout({ children }) {
                   <li>
                     <Link href="/profile">
                       {userCurrent ? (
-                        <>
+                        <div className="tw-flex tw-items-center ">
                           {userCurrent.email}
                           <img src="images/profile-header.jpg" alt="" />
-                        </>
+                        </div>
                       ) : (
-                        "Login"
+                        "Profile"
                       )}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/arena"
+                      className={router.pathname === "/arena" ? "active" : ""}
+                    >
+                      Logout
                     </Link>
                   </li>
                 </ul>

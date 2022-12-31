@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { getCharacterById } from "../../services/characterService";
+import Link from "next/link";
 
 const Character = () => {
   const router = useRouter();
@@ -15,6 +16,28 @@ const Character = () => {
   }, [id]);
   return (
     <>
+      <div className=" tw-text-white">
+        <Link
+          href="/list-character"
+          className={router.pathname === "/list-character" ? "active" : ""}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="tw-w-6 tw-h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+            />
+          </svg>
+        </Link>
+      </div>
+
       {character && (
         <div className="item row py-4 my-2">
           <div className="col-lg-2">
