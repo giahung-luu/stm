@@ -23,8 +23,9 @@ function SignUp() {
    */
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const { email, password } = e.target;
-    const result = await signUp(email.value, password.value);
+    const { displayName, email, password } = e.target;
+    const result = await signUp(email.value, password.value, displayName.value);
+    console.log(result);
   };
 
   return (
@@ -47,13 +48,10 @@ function SignUp() {
                           <div className="form-outline flex-fill mb-0">
                             <input
                               type="text"
-                              id="form3Example1c"
+                              id="displayName"
                               className="form-control"
                             />
-                            <label
-                              className="form-label"
-                              htmlFor="form3Example1c"
-                            >
+                            <label className="form-label" htmlFor="displayName">
                               Your Name
                             </label>
                           </div>
@@ -95,23 +93,6 @@ function SignUp() {
                           </div>
                         </div>
 
-                        <div className="d-flex flex-row align-items-center mb-4">
-                          <i className="fas fa-key fa-lg me-3 fa-fw"></i>
-                          <div className="form-outline flex-fill mb-0">
-                            <input
-                              type="password"
-                              id="form3Example4cd"
-                              className="form-control"
-                            />
-                            <label
-                              className="form-label"
-                              htmlFor="form3Example4cd"
-                            >
-                              Repeat your password
-                            </label>
-                          </div>
-                        </div>
-
                         <div className="form-check d-flex justify-content-center mb-5">
                           <input
                             className="form-check-input me-2"
@@ -131,7 +112,7 @@ function SignUp() {
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button
                             type="submit"
-                            className="btn btn-primary btn-lg"
+                            className="btn btn-primary btn-lg tw-text-blue-500"
                           >
                             Register
                           </button>
