@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Head from 'next/head.js';
-import { getNodes } from "../../../services/nodeService";
-import { node } from "prop-types";
+import { getNodes, addNode, editNode, deleteNode, Node } from "../../../services/nodeService";
+import { addTopic } from "../../../services/topicService";
+
 var mind = {
     meta: {
         name: 'mindmap',
@@ -23,41 +24,101 @@ const options = {
         hide_scrollbars_when_draggable: true,
     },
 };
-
-function EditMindMap({ nodes }) {
+function EditMindMap({ nodesF }) {
     //------------------------------------------------------------------//
     const jm = useRef();
     useEffect(() => {
+        var nodesM = nodesF.slice()
         jm.current = new window.jsMind(options);
         jm.current.show(mind);
-        var parent_array = ["root"];
-        for (let index = 0; index < nodes.length; index++) {
-          if (parent_array.includes(nodes[index].parent_id)) {
-            // Add node
-            var linkurl = '/post/' + nodes[index].id;
-            jm.current.add_node(nodes[index].parent_id, nodes[index].root_id, nodes[index].topic, {
-              'linkurl': linkurl
-            });
-            // Add parent
-            parent_array.push(nodes[index].root_id);
-            // Pop nodes
-            nodes.splice(index, 1);
-            index = -1;
-            console.log(nodes.length + " " + index);
-          }
+        var parent_array = ["root"]; // Mảng chứa node cha để đối chiếu
+        for (let index = 0; index < nodesM.length; index++) {
+            if (parent_array.includes(nodesM[index].parent_id)) {
+                // Add node
+                var linkurl = '/post/' + nodesM[index].id;
+                jm.current.add_node(nodesM[index].parent_id, nodesM[index].root_id, nodesM[index].topic, {
+                    'linkurl': linkurl
+                });
+                // Add parent
+                parent_array.push(nodesM[index].root_id);
+                // Pop nodes
+                nodesM.splice(index, 1);
+                index = -1;
+            }
         }
+
         jm.current.pause_click_handle();
+        // var nodes = jm.current.mind.nodes
+        // for (var nodeid in nodes)
+        //     console.log(nodes[nodeid].topic)
     });
-    const get_nodearray_data = () => {
-        var mind_data = jm.current.get_data('node_array');
-        var mind_string = jsMind.util.json.json2string(mind_data);
-        prompt_info(mind_string);
+
+    // Control 
+    const save = () => {
+
     }
-    const save_nodearray_file = () => {
-        var mind_data = jm.current.get_data('node_array');
-        var mind_name = mind_data.meta.name;
-        var mind_str = jsMind.util.json.json2string(mind_data);
-        jsMind.util.file.save(mind_str, 'text/jsmind', mind_name + '.jm');
+    const open_node = () => {
+        var selected_node = jm.current.get_selected_node();
+        if (!!selected_node) {
+            window.open(selected_node.data.linkurl);
+        } else {
+            prompt_info('Vui lòng chọn node trước');
+        }
+    }
+    const get_selected_nodeid = () => {
+        var selected_node = jm.current.get_selected_node();
+        if (!!selected_node) {
+            return selected_node.id;
+        } else {
+            return null;
+        }
+    }
+    const add_node = async () => {
+        var selected_node = jm.current.get_selected_node();
+        if (!selected_node) {
+            prompt_info('Vui lòng chọn node trước');
+            return;
+        }
+        var nodeid = jsMind.util.uuid.newid();
+        var topic = document.querySelector('#topic').value
+        if (topic == null)
+            topic = '* Node_' + nodeid.substr(nodeid.length - 6) + ' *';
+        jm.current.add_node(selected_node, nodeid, topic);
+
+        var node = new Node(selected_node.id, nodeid, topic)
+        var id = await addNode(node);
+        addTopic(id,topic)
+        nodesF.push({
+            "id" : id,
+            "parent_id" : selected_node.id,
+            "root_id" : nodeid,
+            "topic" : topic
+        })
+    }
+    const modify_node = () => {
+        const topic = document.querySelector('#topic').value
+        var selected_id = get_selected_nodeid();
+        if (!selected_id) {
+            prompt_info('Vui lòng chọn node trước');
+            return;
+        }
+        jm.current.update_node(selected_id, topic);
+        nodesF.forEach(e => {
+            if(e.root_id == selected_id)
+                editNode(e.id,new Node(e.parent_id,e.root_id,topic))
+        });
+    }
+    const remove_node = () => {
+        var selected_id = get_selected_nodeid();
+        if (!selected_id) {
+            prompt_info('Vui lòng chọn node trước');
+            return;
+        }
+        jm.current.remove_node(selected_id);
+        nodesF.forEach(e => {
+            if(e.root_id == selected_id)
+                deleteNode(e.id)
+        });
     }
     return (
         <>
@@ -67,38 +128,56 @@ function EditMindMap({ nodes }) {
                 <script type="text/javascript" src="../js/jsmind.draggable-node.js"></script>
                 <script type="text/javascript" src="../js/jsmind.screenshot.js"></script>
             </Head>
-            <style jsx>{`
-                button {
-                color: blue;
-                }
-            `}</style>
-            <div id="layout">
-                <div id="jsmind_nav">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>1. Open</td>
-                                <td><button onclick="open_json();">open example</button></td>
-                            </tr>
-                            <tr>
-                                <td>2.Select</td>
-                                <td><button onclick="show_selected();">get the selected</button></td>
-                            </tr>
-                            <tr>
-                                <td>3.Edit</td>
-                                <td><button onclick="toggle_editable(this);">disable editable</button></td>
-                                <td><button onclick="add_node();">add a node</button></td>
-                                <td><button onclick="modify_node();">modify node</button></td>
-                                <td><button onclick="remove_node();">remove node</button></td>
-                            </tr>
-                            <tr><td>Multi format</td>
-                                <td><button class="sub" onClick={() => get_nodearray_data()}>show data</button></td>
-                                <td><button class="sub" onClick={() => save_nodearray_file()}>save file</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div className="tw-relative tw-flex tw-flex-col tw-min-w-0 tw-break-words tw-w-full tw-b-6 tw-shadow-lg tw-rounded tw-bg-white">
+                <div id="layout">
+                    <div id="jsmind_nav">
+                        <ul>
+                            <li id="button">
+                                <button
+                                    className="tw-py-1 tw-px-4 tw-bg-lightBlue-500 tw-text-white tw-rounded-lg hover:tw-text-lightBlue-500 hover:tw-bg-white tw-border tw-border-lightBlue-500"
+                                    onClick={() => add_node()}>
+                                    Thêm node
+                                </button>
+                            </li>
+                            <li id="button">
+                                <button
+                                    className="tw-py-1 tw-px-4 tw-bg-lightBlue-500 tw-text-white tw-rounded-lg hover:tw-text-lightBlue-500 hover:tw-bg-white tw-border tw-border-lightBlue-500"
+                                    onClick={() => modify_node()}>
+                                    Sửa node
+                                </button>
+                            </li>
+                            <li id="button">
+                                <button
+                                    className="tw-py-1 tw-px-4 tw-bg-lightBlue-500 tw-text-white tw-rounded-lg hover:tw-text-lightBlue-500 hover:tw-bg-white tw-border tw-border-lightBlue-500"
+                                    onClick={() => open_node()}>
+                                    Mở topic
+                                </button>
+                            </li>
+                            <li id="button">
+                                <button
+                                    className="tw-py-1 tw-px-4 tw-bg-lightBlue-500 tw-text-white tw-rounded-lg hover:tw-text-lightBlue-500 hover:tw-bg-white tw-border tw-border-lightBlue-500"
+                                    onClick={() => remove_node()}>
+                                    Xoá node
+                                </button>
+                            </li>
+                            <li id="button">
+                                <button
+                                    className="tw-py-1 tw-px-4 tw-bg-lightBlue-500 tw-text-white tw-rounded-lg hover:tw-text-lightBlue-500 hover:tw-bg-white tw-border tw-border-lightBlue-500"
+                                    onClick={() => save()}>
+                                    Lưu
+                                </button>
+                            </li>
+                            <div className="tw-text-sky-800 tw-px-2">
+                                Tên node
+                            </div>
+                            <li id="button">
+                                <input className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-w-full"
+                                    type="text" name="topic" id="topic" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="jsmind_container"></div>
                 </div>
-                <div id="jsmind_container"></div>
             </div>
         </>
     )
@@ -107,88 +186,15 @@ EditMindMap.layout = "admin";
 
 export default EditMindMap;
 export async function getStaticProps() {
-    const nodes = await getNodes();
-    if (!nodes) {
+    const nodesF = await getNodes();
+    if (!nodesF) {
         return {
             notFound: true,
         };
     }
     return {
-        props: { nodes },
+        props: { nodesF },
     };
-}
-
-function show_data() {
-    var mind_data = _jm.get_data();
-    var mind_string = jsMind.util.json.json2string(mind_data);
-    prompt_info(mind_string);
-}
-
-function save_file() {
-    var mind_data = _jm.get_data();
-    var mind_name = mind_data.meta.name;
-    var mind_str = jsMind.util.json.json2string(mind_data);
-    jsMind.util.file.save(mind_str, 'text/jsmind', mind_name + '.jm');
-}
-
-function show_selected() {
-    var selected_node = _jm.get_selected_node();
-    if (!!selected_node) {
-        prompt_info(selected_node.topic);
-    } else {
-        prompt_info('nothing');
-    }
-}
-function get_selected_nodeid() {
-    var selected_node = _jm.get_selected_node();
-    if (!!selected_node) {
-        return selected_node.id;
-    } else {
-        return null;
-    }
-}
-
-function add_node() {
-    var selected_node = _jm.get_selected_node(); // as parent of new node
-    if (!selected_node) {
-        prompt_info('please select a node first.');
-        return;
-    }
-
-    var nodeid = jsMind.util.uuid.newid();
-    var topic = '* Node_' + nodeid.substr(nodeid.length - 6) + ' *';
-    var node = _jm.add_node(selected_node, nodeid, topic);
-}
-
-function modify_node() {
-    var selected_id = get_selected_nodeid();
-    if (!selected_id) {
-        prompt_info('please select a node first.');
-        return;
-    }
-
-    // modify the topic
-    _jm.update_node(selected_id, '--- modified ---');
-}
-
-function remove_node() {
-    var selected_id = get_selected_nodeid();
-    if (!selected_id) {
-        prompt_info('please select a node first.');
-        return;
-    }
-
-    _jm.remove_node(selected_id);
-}
-function toggle_editable(btn) {
-    var editable = _jm.get_editable();
-    if (editable) {
-        _jm.disable_edit();
-        btn.innerHTML = 'enable editable';
-    } else {
-        _jm.enable_edit();
-        btn.innerHTML = 'disable editable';
-    }
 }
 function prompt_info(msg) {
     alert(msg);

@@ -50,9 +50,9 @@ function Mindmap({ nodes }) {
         // Pop nodes
         nodes.splice(index, 1);
         index = -1;
-        console.log(nodes.length + " " + index);
       }
     }
+    // jm.current.set_node_background_color();
     jm.current.disable_edit();
   });
   return (

@@ -1649,6 +1649,13 @@
                 this.event_handles[i](type, data);
             }
         },
+        // // Bo sung phuong thuoc change node color
+        // set_node_background_color:function () {
+        //     var nodes = this.mind.nodes;
+        //     for (var nodeid in nodes) {
+        //         nodes[nodeid].element.style.backgroundColor = "green"
+        //     }
+        // },
 
     };
 
