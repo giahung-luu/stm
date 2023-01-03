@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getTopicById, editTopic } from "../../../../services/topicService";
 import { notify } from "../../../../components";
-
+import Link from "next/link";
 function EditTopic({ params }) {
   const { id } = params;
   const [post, setTopic] = useState({});
@@ -36,7 +36,7 @@ function EditTopic({ params }) {
         <div className="tw-rounded-t tw-mb-0 tw-px-4 tw-py-3 tw-border-0">
           <div className="tw-flex tw-flex-wrap tw-items-center tw-justify-between">
             <div className="tw-relative tw-w-full tw-px-4 tw-max-w-full tw-flex-grow tw-flex-1">
-              <h3 className="tw-font-semibold tw-text-lg tw-text-blueGray-700">
+              <h3 className="tw-font-semibold tw-text-lg tw-text-blueGray-700" style={{fontSize:'35px'}}>
                 Chỉnh sửa bài viết
               </h3>
             </div>
@@ -49,16 +49,16 @@ function EditTopic({ params }) {
             onSubmit={handleUpdateTopic}
           >
             <div className="tw-relative tw-p-6 tw-flex-auto">
-              <div>
+              <h1 style={{ color: 'black',fontSize:'30px', fontFamily : 'times'}}>
                 Tiêu đề: {post.topic}
-              </div>
+              </h1>
               <div>
-                <label htmlFor="content" className="tw-block">
+                <label htmlFor="content" className="tw-block" style={{ color: 'black',fontSize:'20px', fontFamily : 'times'}}>
                   Nội dung
                 </label>
                 <textarea
                   name="content"
-                  rows="4"
+                  rows="20"
                   className="tw-px-2 tw-py-1 tw-placeholder-blueGray-300 tw-text-blueGray-600 tw-relative tw-bg-white tw-rounded tw-text-sm tw-border tw-border-blueGray-300 tw-outline-none focus:tw-outline-none focus:tw-shadow-outline tw-w-full"
                   required={true}
                   defaultValue={post.content}
@@ -73,6 +73,13 @@ function EditTopic({ params }) {
               >
                 Update
               </button>
+              <div
+                className="tw-bg-lightBlue-500 tw-text-white active:tw-bg-emerald-600 tw-font-bold tw-uppercase tw-text-sm tw-px-6 tw-py-2 tw-rounded tw-shadow hover:tw-shadow-lg tw-outline-none focus:tw-outline-none tw-mr-1 tw-mb-1 tw-ease-linear tw-transition-all tw-duration-150">
+                  <Link href={`/admin/topic`}>
+                  Back
+                  </Link>
+                
+              </div>
             </div>
           </form>
         )}

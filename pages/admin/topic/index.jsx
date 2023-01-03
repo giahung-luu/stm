@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import {getTopic} from "../../../services/topicService";
+import { getTopic } from "../../../services/topicService";
 function EditTopic({ topics }) {
     return (
         <>
@@ -54,7 +54,14 @@ function EditTopic({ topics }) {
                                                         {/* {item.content.map((con) => (
                                                             <li>{con}</li>
                                                         ))} */}
-                                                        {item.content}
+                                                        <p style={{
+                                                             display: 'block',
+                                                             width: '800px',
+                                                             overflow: 'hidden',
+                                                             whiteSpace: 'nowrap',
+                                                             textOverflow: 'ellipsis'
+                                                        }}>{item.content}</p>
+                                                        
                                                     </td>
                                                     <td></td>
                                                     <td></td>

@@ -17,7 +17,7 @@ const Post = () => {
   return (
     post != null ?(
     <>      
-            <h1 className="tw-text-4xl tw-font-bold tw-mb-2">
+            <h1 className="tw-text-4xl tw-font-bold tw-mb-2" style={{fontFamily:'arial',fontSize:'30px'}}>
               {post.topic}
             </h1>
             <ul className="tw-ml-6 tw-mb-4">
@@ -31,7 +31,7 @@ const Post = () => {
                   </li>
                 );
               })} */}
-              <div className="tw-text-gray-300 tw-list-disc tw-mb-1">{post.content}</div>
+              <div className="tw-text-gray-300 tw-list-disc tw-mb-1" style={{whiteSpace :'pre-line', fontFamily:'times',fontSize:'24px'}}>{post.content}</div>
               
             </ul>
     </>
