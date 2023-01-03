@@ -51,9 +51,10 @@ function EditTopic({ topics }) {
                                                         {item.topic}
                                                     </td>
                                                     <td className="w-1 tw-border-t-0 tw-px-6 tw-align-middle tw-border-l-0 tw-border-r-0 tw-text-xs tw-p-4">
-                                                        {item.content?.map((con) => (
+                                                        {/* {item.content.map((con) => (
                                                             <li>{con}</li>
-                                                        ))}
+                                                        ))} */}
+                                                        {item.content}
                                                     </td>
                                                     <td></td>
                                                     <td></td>
