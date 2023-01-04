@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Head from 'next/head.js';
 import { getNodes, addNode, editNode, deleteNode, Node } from "../../../services/nodeService";
-import { addTopic } from "../../../services/topicService";
+import { addTopic, deleteTopic} from "../../../services/topicService";
 
 var mind = {
     meta: {
@@ -116,8 +116,10 @@ function EditMindMap({ nodesF }) {
         }
         jm.current.remove_node(selected_id);
         nodesF.forEach(e => {
-            if(e.root_id == selected_id)
+            if(e.root_id == selected_id){
                 deleteNode(e.id)
+                deleteTopic(e.id)
+            }
         });
     }
     return (

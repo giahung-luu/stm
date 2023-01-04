@@ -36,7 +36,7 @@ export async function editTopic(id,content,topic) {
 
 export async function deleteTopic(id) {
   try {
-    await deleteDoc(doc(database, "node", id));
+    await deleteDoc(doc(database, "post", id));
   } catch (e) {
     return e;
   }
