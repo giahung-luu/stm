@@ -11,6 +11,7 @@ function Result({ answers }) {
       const rightAnswers = ans.filter(
         (ans) => compare[ans.choose] === ans.right_answer
       );
+      console.log("r", rightAnswers);
       // score = total right answers point
       setScore(rightAnswers.reduce((acc, cur) => acc + parseInt(cur.point), 0));
     }

@@ -1,5 +1,6 @@
+import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head.js";
+import Head from "next/head";
 import { getNodes } from "../services/nodeService";
 
 var mind = {
@@ -41,10 +42,15 @@ function Mindmap({ nodes }) {
     for (let index = 0; index < nodes.length; index++) {
       if (parent_array.includes(nodes[index].parent_id)) {
         // Add node
-        var linkurl = '/post/' + nodes[index].id;
-        jm.current.add_node(nodes[index].parent_id, nodes[index].root_id, nodes[index].topic, {
-          'linkurl': linkurl
-        });
+        var linkurl = "/post/" + nodes[index].id;
+        jm.current.add_node(
+          nodes[index].parent_id,
+          nodes[index].root_id,
+          nodes[index].topic,
+          {
+            linkurl: linkurl,
+          }
+        );
         // Add parent
         parent_array.push(nodes[index].root_id);
         // Pop nodes
