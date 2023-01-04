@@ -56,7 +56,7 @@ function EditTopic({ topics }) {
                                                         ))} */}
                                                         <p style={{
                                                              display: 'block',
-                                                             width: '800px',
+                                                             width: '700px',
                                                              overflow: 'hidden',
                                                              whiteSpace: 'nowrap',
                                                              textOverflow: 'ellipsis'
