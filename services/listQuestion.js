@@ -64,7 +64,6 @@ export async function getQuestionsByIdCharacter(id) {
     querySnapshot.forEach((doc) => {
       questions.push({ ...doc.data(), id: doc.id });
     });
-    // console.log(querySnapshot);
     return questions;
   } catch (e) {
     return false;

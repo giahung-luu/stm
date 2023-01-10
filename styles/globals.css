@@ -147,10 +147,3 @@
     clip: rect(0px, 350px, 580px, 0px);
   }
 }
-.search-result {
-  background: #333;
-  padding: 12px;
-  color: white;
-  border-radius: 8px;
-  margin-top: 6px;
-}
