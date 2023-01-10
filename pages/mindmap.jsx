@@ -60,7 +60,7 @@ function Mindmap({ nodes }) {
     }
     // jm.current.set_node_background_color();
     jm.current.disable_edit();
-  });
+  }, []);
   return (
     <>
       <Head>
