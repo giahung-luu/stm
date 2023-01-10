@@ -41,10 +41,15 @@ function Mindmap({ nodes }) {
     for (let index = 0; index < nodes.length; index++) {
       if (parent_array.includes(nodes[index].parent_id)) {
         // Add node
-        var linkurl = '/post/' + nodes[index].id;
-        jm.current.add_node(nodes[index].parent_id, nodes[index].root_id, nodes[index].topic, {
-          'linkurl': linkurl
-        });
+        var linkurl = "/post/" + nodes[index].id;
+        jm.current.add_node(
+          nodes[index].parent_id,
+          nodes[index].root_id,
+          nodes[index].topic,
+          {
+            linkurl: linkurl,
+          }
+        );
         // Add parent
         parent_array.push(nodes[index].root_id);
         // Pop nodes
@@ -54,7 +59,7 @@ function Mindmap({ nodes }) {
     }
     // jm.current.set_node_background_color();
     jm.current.disable_edit();
-  });
+  }, []);
   return (
     <>
       <Head>
